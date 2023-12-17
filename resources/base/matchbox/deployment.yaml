@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: matchbox
+  namespace: matchbox
+  annotations:
+    cert-manager.io/inject-ca-from: matchbox/matchbox-rpc
+  labels:
+    app.kubernetes.io/name: matchbox
+    app.kubernetes.io/instance: matchbox
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      name: matchbox
+  template:
+    metadata:
+      labels:
+        name: matchbox
+    spec:
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: matchbox
+          image: quay.io/poseidon/matchbox:v0.10.0
+          env:
+            - name: MATCHBOX_ADDRESS
+              value: "0.0.0.0:8080"
+            - name: MATCHBOX_RPC_ADDRESS
+              value: "0.0.0.0:8081"
+            - name: MATCHBOX_LOG_LEVEL
+              value: "debug"
+            - name: MATCHBOX_CA_FILE
+              value: "/etc/matchbox/ca.crt"
+            - name: MATCHBOX_CERT_FILE
+              value: "/etc/matchbox/tls.crt"
+            - name: MATCHBOX_KEY_FILE
+              value: "/etc/matchbox/tls.key"
+          ports:
+            - name: http
+              containerPort: 8080
+            - name: https
+              containerPort: 8081
+          livenessProbe:
+            initialDelaySeconds: 5
+            httpGet:
+              path: /
+              port: 8080
+          resources:
+            requests:
+              cpu: 30m
+              memory: 20Mi
+            limits:
+              cpu: 50m
+              memory: 50Mi
+          volumeMounts:
+            - name: config
+              mountPath: /etc/matchbox
+            - name: data
+              mountPath: /var/lib/matchbox
+            - name: assets
+              mountPath: /var/lib/matchbox/assets
+      volumes:
+        - name: config
+          secret:
+            secretName: matchbox-rpc
+        - name: data
+          emptyDir: {}
+        - name: assets
+          emptyDir: {}

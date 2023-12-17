@@ -1,0 +1,10 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- handler.yaml
+- namespace.yaml
+- nmstate.io_nmstates.yaml
+- operator.yaml
+- role_binding.yaml
+- role.yaml
+- service_account.yaml

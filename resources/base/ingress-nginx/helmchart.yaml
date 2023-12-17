@@ -1,0 +1,34 @@
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: ingress-nginx
+  namespace: ingress-nginx
+spec:
+  chart: ingress-nginx
+  repo: https://kubernetes.github.io/ingress-nginx
+  targetNamespace: ingress-nginx
+  version: v4.6.1
+  set:
+  valuesContent: |-
+    fullnameOverride: ingress-nginx
+    controller:
+      kind: DaemonSet
+      hostNetwork: true
+      hostPort:
+        enabled: true
+      ingressClassResource:
+        default: true
+      service:
+        enabled: false
+        externalTrafficPolicy: "Local"
+      publishService:
+        enabled: false
+      metrics:
+        enabled: false
+        serviceMonitor:
+          enabled: false
+      admissionWebhooks:
+        enabled: false
+      config:
+        use-forwarded-headers: "true"
+        enable-ssl-passthrough: "true"

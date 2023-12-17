@@ -1,0 +1,71 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: netbootxyz-assets
+  namespace: netbootxyz
+  labels:
+    app: "netbootxyz"
+    app.kubernetes.io/instance: "netbootxyz"
+    app.kubernetes.io/name: "netbootxyz"
+    service.name: "assets"
+spec:
+  type: ClusterIP
+  publishNotReadyAddresses: false
+  ports:
+    - name: assets
+      port: 80
+      protocol: TCP
+      targetPort: 80
+  selector:
+    pod.name: main
+    app.kubernetes.io/name: netbootxyz
+    app.kubernetes.io/instance: netbootxyz
+---
+# Source: netbootxyz/templates/common.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: netbootxyz
+  namespace: netbootxyz
+  labels:
+    app: "netbootxyz"
+    app.kubernetes.io/instance: "netbootxyz"
+    app.kubernetes.io/name: "netbootxyz"
+    service.name: "main"
+spec:
+  type: ClusterIP
+  publishNotReadyAddresses: false
+  ports:
+    - name: main
+      port: 3000
+      protocol: TCP
+      targetPort: 3000
+  selector:
+    pod.name: main
+    app.kubernetes.io/name: netbootxyz
+    app.kubernetes.io/instance: netbootxyz
+---
+# Source: netbootxyz/templates/common.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: netbootxyz-tftp
+  namespace: netbootxyz
+  labels:
+    app: "netbootxyz"
+    app.kubernetes.io/instance: "netbootxyz"
+    app.kubernetes.io/name: "netbootxyz"
+    service.name: "tftp"
+spec:
+  type: ClusterIP
+  publishNotReadyAddresses: false
+  ports:
+    - name: tftp
+      port: 69
+      protocol: UDP
+      targetPort: 69
+  selector:
+    pod.name: main
+    app.kubernetes.io/name: netbootxyz
+    app.kubernetes.io/instance: netbootxyz

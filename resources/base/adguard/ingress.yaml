@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: HTTP
+  name: adguard
+  namespace: adguard
+spec:
+  ingressClassName: nginx
+  rules:
+  # kustomize will replace this with the cluster ip address
+  - host: adguard.xxx.xxx.xxx.xxx.nip.io
+    http:
+      paths:
+      - backend:
+          service:
+            name: adguard
+            port:
+              name: http
+        path: /
+        pathType: ImplementationSpecific

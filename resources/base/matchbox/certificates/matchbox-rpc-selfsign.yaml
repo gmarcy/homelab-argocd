@@ -1,0 +1,10 @@
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: matchbox-rpc-selfsign
+  namespace: matchbox
+  labels:
+    app.kubernetes.io/name: matchbox
+    app.kubernetes.io/instance: matchbox
+spec:
+  selfSigned: {}

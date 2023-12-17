@@ -1,0 +1,48 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: matchbox
+  namespace: matchbox
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: HTTP
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  ingressClassName: nginx
+  rules:
+  # kustomize will replace this with the cluster ip address
+  - host: matchbox.xxx.xxx.xxx.xxx.nip.io
+    http:
+      paths:
+      - backend:
+          service:
+            name: matchbox
+            port:
+              number: 8080
+        path: /
+        pathType: Prefix
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: HTTPS
+    nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+  name: matchbox-rpc
+  namespace: matchbox
+spec:
+  ingressClassName: nginx
+  rules:
+  # kustomize will replace this with the cluster ip address
+  - host: matchbox-rpc.xxx.xxx.xxx.xxx.nip.io
+    http:
+      paths:
+      - backend:
+          service:
+            name: matchbox
+            port:
+              number: 8081
+        path: /
+        pathType: Prefix
+  tls:
+  # kustomize will add hosts
+  - hosts: []

@@ -1,0 +1,9 @@
+appName: topolvm
+userGivenName: topolvm
+destNamespace: default
+destServer: https://192.168.222.214.nip.io:6443
+srcPath: resources/overlays/nuc10-cluster/topolvm
+srcRepoURL: https://github.com/gmarcy/homelab-argocd.git
+srcTargetRevision: ''
+labels: null
+annotations: null

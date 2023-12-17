@@ -1,0 +1,132 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: netbootxyz
+  namespace: netbootxyz
+  labels:
+    app: "netbootxyz"
+    app.kubernetes.io/instance: "netbootxyz"
+    app.kubernetes.io/name: "netbootxyz"
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      pod.name: main
+      app.kubernetes.io/name: netbootxyz
+      app.kubernetes.io/instance: netbootxyz
+  template:
+    metadata:
+      labels:
+        app: "netbootxyz"
+        app.kubernetes.io/instance: "netbootxyz"
+        app.kubernetes.io/name: "netbootxyz"
+        pod.name: "main"
+    spec:
+      securityContext:
+        sysctls:
+          - name: "net.ipv4.ip_unprivileged_port_start"
+            value: "69"
+      containers:
+        - name: netbootxyz
+          image: lscr.io/linuxserver/netbootxyz
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: assets
+              containerPort: 80
+              protocol: TCP
+            - name: main
+              containerPort: 3000
+              protocol: TCP
+            - name: tftp
+              containerPort: 69
+              protocol: UDP
+          volumeMounts:
+            - name: assets
+              mountPath: /assets
+              readOnly: false
+            - name: config
+              mountPath: /config
+              readOnly: false
+          livenessProbe:
+            httpGet:
+              port: 3000
+              path: /
+              scheme: HTTP
+            initialDelaySeconds: 10
+            failureThreshold: 5
+            successThreshold: 1
+            timeoutSeconds: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              port: 3000
+              path: /
+              scheme: HTTP
+            initialDelaySeconds: 10
+            failureThreshold: 5
+            successThreshold: 2
+            timeoutSeconds: 5
+            periodSeconds: 10
+          startupProbe:
+            httpGet:
+              port: 3000
+              path: /
+              scheme: HTTP
+            initialDelaySeconds: 10
+            failureThreshold: 60
+            successThreshold: 1
+            timeoutSeconds: 2
+            periodSeconds: 5
+          resources:
+            requests:
+              cpu: 10m
+              memory: 50Mi
+            limits:
+              cpu: 4000m
+              memory: 8Gi
+          securityContext:
+            runAsNonRoot: false
+            runAsUser: 0
+            runAsGroup: 0
+            readOnlyRootFilesystem: false
+            allowPrivilegeEscalation: false
+            privileged: false
+            seccompProfile:
+              type: RuntimeDefault
+            capabilities:
+              add:
+                - SYS_CHROOT
+                - NET_BIND_SERVICE
+                - CHOWN
+                - SETUID
+                - SETGID
+                - FOWNER
+                - DAC_OVERRIDE
+              drop:
+                - ALL
+          env:
+            - name: "TZ"
+              value: "UTC"
+            - name: "UMASK"
+              value: "0022"
+            - name: "UMASK_SET"
+              value: "0022"
+            - name: "MENU_VERSION"
+              value: "2.0.75"
+            - name: "PUID"
+              value: "1000"
+            - name: "PGID"
+              value: "1000"
+            - name: "PORT_RANGE"
+              value: "30000:30010"
+      volumes:
+        - name: assets
+          persistentVolumeClaim:
+            claimName: netbootxyz-assets
+        - name: config
+          persistentVolumeClaim:
+            claimName: netbootxyz-config

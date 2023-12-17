@@ -1,0 +1,9 @@
+appName: argocd
+userGivenName: argocd
+destNamespace: default
+destServer: https://kubernetes.default.svc
+srcPath: resources/overlays/argocd-cluster/argocd
+srcRepoURL: https://github.com/gmarcy/homelab-argocd.git
+srcTargetRevision: ''
+labels: null
+annotations: null

@@ -1,0 +1,9 @@
+appName: ingress-nginx
+userGivenName: ingress-nginx
+destNamespace: default
+destServer: https://kubernetes.default.svc
+srcPath: apps/ingress-nginx
+srcRepoURL: https://github.com/gmarcy/homelab-argocd.git
+srcTargetRevision: ''
+labels: null
+annotations: null

@@ -1,0 +1,9 @@
+appName: awx
+userGivenName: awx
+destNamespace: awx
+destServer: https://192.168.222.253.nip.io:6443
+srcPath: deployments/netsvcs-cluster/awx
+srcRepoURL: https://github.com/gmarcy/homelab-argocd.git
+srcTargetRevision: ''
+labels: null
+annotations: null

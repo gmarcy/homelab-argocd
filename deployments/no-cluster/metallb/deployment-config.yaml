@@ -1,0 +1,9 @@
+appName: metallb
+userGivenName: metallb
+destNamespace: metallb-system
+destServer: https://192.168.222.xxx.nip.io:6443
+srcPath: deployments/no-cluster/metallb
+srcRepoURL: https://github.com/gmarcy/homelab-argocd.git
+srcTargetRevision: ''
+labels: null
+annotations: null

@@ -1,0 +1,9 @@
+appName: kube-vip
+userGivenName: kube-vip
+destNamespace: kube-system
+destServer: https://192.168.222.214.nip.io:6443
+srcPath: deployments/nuc10-cluster/kube-vip
+srcRepoURL: https://github.com/gmarcy/homelab-argocd.git
+srcTargetRevision: ''
+labels: null
+annotations: null

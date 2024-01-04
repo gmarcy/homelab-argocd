@@ -1,0 +1,9 @@
+appName: kubernetes-dashboard
+userGivenName: kubernetes-dashboard
+destNamespace: kubernetes-dashboard
+destServer: https://kubernetes.default.svc
+srcPath: deployments/argocd-cluster/dashboard
+srcRepoURL: https://github.com/gmarcy/homelab-argocd.git
+srcTargetRevision: ''
+labels: null
+annotations: null

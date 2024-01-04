@@ -1,0 +1,9 @@
+appName: openshift-console
+userGivenName: openshift-console
+destNamespace: default
+destServer: https://kubernetes.default.svc
+srcPath: deployments/argocd-cluster/console
+srcRepoURL: https://github.com/gmarcy/homelab-argocd.git
+srcTargetRevision: ''
+labels: null
+annotations: null

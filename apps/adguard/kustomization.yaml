@@ -1,0 +1,89 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: adguard
+
+resources:
+  - configmap.yaml
+  - namespace.yaml
+  - pvc.yaml
+
+helmCharts:
+  - name: app-template
+    repo: https://bjw-s.github.io/helm-charts/
+    releaseName: adguard
+    namespace: adguard
+    version: 1.5.1 # 2.4.0
+    valuesInline:
+      image:
+        repository: adguard/adguardhome
+        tag: v0.107.43
+        pullPolicy: IfNotPresent
+      initContainers:
+        copy:
+          image: busybox:1.36
+          command:
+            - /bin/sh
+            - -c
+            - cp /config/*.yaml /opt/adguardhome/conf/
+          volumeMounts:
+            - name: conf
+              mountPath: /config/
+            - name: data
+              subPath: conf
+              mountPath: /opt/adguardhome/conf
+      probes:
+        liveness:
+          enabled: false
+        readiness:
+          enabled: false
+        startup:
+          enabled: false
+      securityContext:
+        privileged: true
+      service:
+        main:
+          enabled: true
+          ports:
+            http:
+              port: 3080
+              protocol: TCP
+      hostNetwork: true
+      ingress:
+        main:
+          enabled: true
+          ingressClassName: nginx
+          annotations:
+            nginx.ingress.kubernetes.io/backend-protocol: HTTP
+          hosts:
+            # kustomize will replace this with the cluster ip address
+            - host: adguard.xxx.xxx.xxx.xxx.nip.io
+              paths:
+                - path: /
+                  pathType: Prefix
+      persistence:
+        conf:
+          enabled: true
+          type: configMap
+          name: adguard-config
+          mountPath: "-"
+        data:
+          enabled: true
+          existingClaim: adguard
+          mountPath: /opt/adguardhome/work
+          subpath: work
+
+patches:
+  - patch: |-
+      - op: remove
+        path: /spec/template/spec/containers/0/ports
+      - op: add
+        path: /spec/template/spec/containers/0/volumeMounts/0/subPath
+        value: work
+      - op: add
+        path: /spec/template/spec/containers/0/volumeMounts/-
+        value: { mountPath: /opt/adguardhome/conf, name: data, subPath: conf }
+    target:
+      group: apps
+      version: v1
+      kind: Deployment
+      name: adguard

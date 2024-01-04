@@ -1,0 +1,28 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - namespace.yaml
+
+helmCharts:
+  - name: kubernetes-dashboard
+    repo: https://kubernetes.github.io/dashboard/
+    releaseName: kubernetes-dashboard
+    namespace: kubernetes-dashboard
+    version: 7.0.0-alpha1
+    valuesInline:
+      app:
+        ingress:
+          pathType: Prefix
+          hosts:
+            # kustomize will replace this with the cluster ip address
+            - dashboard.xxx.xxx.xxx.xxx.nip.io
+          ingressClassName: nginx
+          annotations:
+            nginx.ingress.kubernetes.io/ssl-redirect: "true"
+      cert-manager:
+        enabled: false
+      metrics-server:
+        enabled: false
+      nginx:
+        enabled: false

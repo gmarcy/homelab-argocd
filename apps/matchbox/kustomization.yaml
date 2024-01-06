@@ -18,14 +18,57 @@ helmCharts:
           rollingUpdate:
             unavailable: 1
           initContainers:
-            init:
+            builder:
+              image:
+                repository: ghcr.io/gmarcy/homelab-matchbox-builder
+                tag: latest
+              command:
+                - '-e'
+                - 'data_path=/var/lib/matchbox'
+            coreos-installer-download:
+              image:
+                repository: quay.io/coreos/coreos-installer
+                tag: release
+              command:
+                - 'download'
+                - '-f'
+                - 'pxe'
+                - '-C'
+                - '/var/lib/matchbox/assets/fedora-coreos/download'
+            rename-coreos-assets:
               image:
                 repository: busybox
                 tag: 1.36
               command:
-                - /bin/sh
+                - '/bin/sh'
                 - '-c'
-                - mkdir -p /var/lib/matchbox/assets
+                - '/var/lib/matchbox/assets/fedora-coreos/download/rename_assets.sh'
+            coreos-installer-customize:
+              image:
+                repository: quay.io/coreos/coreos-installer
+                tag: release
+              command:
+                - 'pxe'
+                - 'customize'
+                - '--pre-install'
+                - '/var/lib/matchbox/assets/fedora-coreos/pre-install/wipefs-partitions.sh'
+                - '--post-install'
+                - '/var/lib/matchbox/assets/fedora-coreos/post-install/efibootmgr-order-fix.sh'
+                - '--output'
+                - '/var/lib/matchbox/assets/fedora-coreos/fedora-coreos-live-initramfs.x86_64.img'
+                - '/var/lib/matchbox/assets/fedora-coreos/download/fedora-coreos-live-initramfs.x86_64.img'
+            coreos-butane-create-ignition:
+              image:
+                repository: quay.io/coreos/butane
+                tag: release
+              command:
+                - '--pretty'
+                - '--strict'
+                - '-d'
+                - '/var/lib/matchbox/generic'
+                - '-o'
+                - '/var/lib/matchbox/generic/fedora-coreos-config.ign'
+                - '/var/lib/matchbox/generic/fedora-coreos-butane.yaml'
           containers:
             main:
               image:

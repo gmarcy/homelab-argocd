@@ -19,13 +19,28 @@ helmCharts:
             unavailable: 1
           initContainers:
             builder:
+              order: 1
               image:
                 repository: ghcr.io/gmarcy/homelab-matchbox-builder
                 tag: latest
               command:
                 - '-e'
                 - 'data_path=/var/lib/matchbox'
+            coreos-butane-create-ignition:
+              order: 2
+              image:
+                repository: quay.io/coreos/butane
+                tag: release
+              command:
+                - '--pretty'
+                - '--strict'
+                - '-d'
+                - '/var/lib/matchbox/generic'
+                - '-o'
+                - '/var/lib/matchbox/generic/fedora-coreos-config.ign'
+                - '/var/lib/matchbox/generic/fedora-coreos-butane.yaml'
             coreos-installer-download:
+              order: 2
               image:
                 repository: quay.io/coreos/coreos-installer
                 tag: release
@@ -36,6 +51,7 @@ helmCharts:
                 - '-C'
                 - '/var/lib/matchbox/assets/fedora-coreos/download'
             rename-coreos-assets:
+              order: 3
               image:
                 repository: busybox
                 tag: 1.36
@@ -44,6 +60,7 @@ helmCharts:
                 - '-c'
                 - '/var/lib/matchbox/assets/fedora-coreos/download/rename_assets.sh'
             coreos-installer-customize:
+              order: 4
               image:
                 repository: quay.io/coreos/coreos-installer
                 tag: release
@@ -57,18 +74,6 @@ helmCharts:
                 - '--output'
                 - '/var/lib/matchbox/assets/fedora-coreos/fedora-coreos-live-initramfs.x86_64.img'
                 - '/var/lib/matchbox/assets/fedora-coreos/download/fedora-coreos-live-initramfs.x86_64.img'
-            coreos-butane-create-ignition:
-              image:
-                repository: quay.io/coreos/butane
-                tag: release
-              command:
-                - '--pretty'
-                - '--strict'
-                - '-d'
-                - '/var/lib/matchbox/generic'
-                - '-o'
-                - '/var/lib/matchbox/generic/fedora-coreos-config.ign'
-                - '/var/lib/matchbox/generic/fedora-coreos-butane.yaml'
           containers:
             main:
               image:

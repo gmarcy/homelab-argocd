@@ -23,7 +23,7 @@ helmCharts:
               image:
                 repository: ghcr.io/gmarcy/homelab-matchbox-builder
                 tag: latest
-              command:
+              args:
                 - '-e'
                 - 'data_path=/var/lib/matchbox'
             coreos-butane-create-ignition:
@@ -31,7 +31,7 @@ helmCharts:
               image:
                 repository: quay.io/coreos/butane
                 tag: release
-              command:
+              args:
                 - '--pretty'
                 - '--strict'
                 - '-d'
@@ -44,7 +44,7 @@ helmCharts:
               image:
                 repository: quay.io/coreos/coreos-installer
                 tag: release
-              command:
+              args:
                 - 'download'
                 - '-f'
                 - 'pxe'
@@ -64,7 +64,7 @@ helmCharts:
               image:
                 repository: quay.io/coreos/coreos-installer
                 tag: release
-              command:
+              args:
                 - 'pxe'
                 - 'customize'
                 - '--pre-install'

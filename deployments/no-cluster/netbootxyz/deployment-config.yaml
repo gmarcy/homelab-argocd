@@ -1,9 +1,0 @@
-appName: netbootxyz
-userGivenName: netbootxyz
-destNamespace: netbootxyz
-destServer: https://192.168.222.xxx.nip.io:6443
-srcPath: deployments/no-cluster/netbootxyz
-srcRepoURL: https://github.com/gmarcy/homelab-argocd.git
-srcTargetRevision: ''
-labels: null
-annotations: null

@@ -21,7 +21,7 @@ spec:
   syncPolicy: {}
   template:
     metadata:
-      name: '{{ app.name }}-{{ cluster.name }}'
+      name: '{{ cluster.name }}-{{ app.name }}'
       namespace: argocd
       labels:
         app.kubernetes.io/name: '{{ app.label }}'

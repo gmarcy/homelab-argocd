@@ -1,0 +1,14 @@
+app:
+  label: argocd
+  name: argocd
+cluster:
+  name: argocd-cluster
+destination:
+  namespace: argocd
+  server: https://kubernetes.default.svc
+project:
+  name: default
+source:
+  path: argocd/overlays/argocd-cluster
+  repoURL: https://github.com/gmarcy/homelab-argocd.git
+  targetRevision: HEAD

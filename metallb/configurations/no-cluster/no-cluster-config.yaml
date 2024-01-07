@@ -1,0 +1,14 @@
+app:
+  label: metallb
+  name: metallb
+cluster:
+  name: no-cluster
+destination:
+  namespace: metallb-system
+  server: https://192.168.222.xxx.nip.io:6443
+project:
+  name: default
+source:
+  path: metallb/overlays/no-cluster
+  repoURL: https://github.com/gmarcy/homelab-argocd.git
+  targetRevision: HEAD

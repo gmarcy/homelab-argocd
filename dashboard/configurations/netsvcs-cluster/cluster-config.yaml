@@ -1,0 +1,14 @@
+app:
+  label: kubernetes-dashboard
+  name: dashboard
+cluster:
+  name: netsvcs-cluster
+destination:
+  namespace: kubernetes-dashboard
+  server: https://192.168.222.253.nip.io:6443
+project:
+  name: default
+source:
+  path: dashboard/overlays/netsvcs-cluster
+  repoURL: https://github.com/gmarcy/homelab-argocd.git
+  targetRevision: HEAD

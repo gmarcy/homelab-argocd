@@ -1,0 +1,14 @@
+app:
+  label: nmstate
+  name: nmstate
+cluster:
+  name: netsvcs-cluster
+destination:
+  namespace: nmstate
+  server: https://192.168.222.253.nip.io:6443
+project:
+  name: default
+source:
+  path: nmstate/overlays/netsvcs-cluster
+  repoURL: https://github.com/gmarcy/homelab-argocd.git
+  targetRevision: HEAD

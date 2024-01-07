@@ -23,6 +23,7 @@ helmCharts:
               image:
                 repository: ghcr.io/gmarcy/homelab-matchbox-builder
                 tag: latest
+                pullPolicy: Always
               args:
                 - '-e'
                 - 'data_path=/var/lib/matchbox'

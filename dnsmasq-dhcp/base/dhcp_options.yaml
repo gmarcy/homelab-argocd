@@ -1,0 +1,85 @@
+---
+
+apiVersion: dnsmasq.kvaps.cf/v1beta1
+kind: DhcpOptions
+metadata:
+  name: dhcp-options
+  namespace: dnsmasq-dhcp
+spec:
+  controller: ""
+  options:
+  - key: option:router
+    tags:
+    - net111
+    values:
+    - 192.168.111.1
+  - key: option:dns-server
+    tags:
+    - net111
+    values:
+    - 192.168.111.253
+  - key: option:domain-name
+    tags:
+    - net111
+    values:
+    - home.glenn4u.com
+  - key: option:domain-search
+    tags:
+    - net111
+    values:
+    - home.glenn4u.com
+  - key: option:dns-server
+    tags:
+    - net123
+    values:
+    - 192.168.123.253
+  - key: option:domain-name
+    tags:
+    - net123
+    values:
+    - ipmi.gmarcy.com
+  - key: option:domain-search
+    tags:
+    - net123
+    values:
+    - ipmi.gmarcy.com
+  - key: option:router
+    tags:
+    - net222
+    values:
+    - 192.168.222.1
+  - key: option:tftp-server
+    tags:
+    - net222
+    values:
+    - 192.168.222.210
+  - key: option:dns-server
+    tags:
+    - net222
+    values:
+    - 192.168.222.253
+  - key: option:domain-name
+    tags:
+    - net222
+    values:
+    - lab.gmarcy.com
+  - key: option:domain-search
+    tags:
+    - net222
+    values:
+    - lab.gmarcy.com
+  - key: option:dns-server
+    tags:
+    - net234
+    values:
+    - 192.168.234.253
+  - key: option:domain-name
+    tags:
+    - net234
+    values:
+    - lab10g.gmarcy.com
+  - key: option:domain-search
+    tags:
+    - net234
+    values:
+    - lab10g.gmarcy.com

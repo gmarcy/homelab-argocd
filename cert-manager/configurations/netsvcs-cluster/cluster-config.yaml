@@ -1,0 +1,14 @@
+app:
+  label: cert-manager
+  name: cert-manager
+cluster:
+  name: netsvcs-cluster
+destination:
+  namespace: cert-manager
+  server: https://192.168.222.253.nip.io:6443
+project:
+  name: default
+source:
+  path: cert-manager/overlays/netsvcs-cluster
+  repoURL: https://github.com/gmarcy/homelab-argocd.git
+  targetRevision: HEAD

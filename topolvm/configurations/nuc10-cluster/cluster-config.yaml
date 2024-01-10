@@ -1,0 +1,14 @@
+app:
+  label: topolvm
+  name: topolvm
+cluster:
+  name: nuc10-cluster
+destination:
+  namespace: topolvm-system
+  server: https://192.168.222.214.nip.io:6443
+project:
+  name: default
+source:
+  path: topolvm/overlays/nuc10-cluster
+  repoURL: https://github.com/gmarcy/homelab-argocd.git
+  targetRevision: HEAD

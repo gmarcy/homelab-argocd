@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - crd_dhcphosts.yaml
+  - crd_dhcpoptions.yaml
+  - crd_dnshosts.yaml
+  - crd_dnsmasqoptions.yaml
+  - deployment.yaml
+  - dhcp_hosts.yaml
+  - dhcp_options.yaml
+  - dnsmasq_options.yaml
+  - namespace.yaml
+  - rolebinding.yaml
+  - role.yaml
+  - serviceaccount.yaml

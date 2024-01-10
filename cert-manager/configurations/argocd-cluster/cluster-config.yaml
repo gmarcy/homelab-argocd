@@ -1,0 +1,14 @@
+app:
+  label: cert-manager
+  name: cert-manager
+cluster:
+  name: argocd-cluster
+destination:
+  namespace: cert-manager
+  server: https://kubernetes.default.svc
+project:
+  name: default
+source:
+  path: cert-manager/overlays/argocd-cluster
+  repoURL: https://github.com/gmarcy/homelab-argocd.git
+  targetRevision: HEAD

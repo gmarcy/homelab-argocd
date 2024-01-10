@@ -1,0 +1,139 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: matchbox
+
+resources:
+  - namespace.yaml
+
+helmCharts:
+  - name: app-template
+    repo: https://bjw-s.github.io/helm-charts/
+    releaseName: matchbox
+    namespace: matchbox
+    version: 2.4.0
+    valuesInline:
+      controllers:
+        main:
+          strategy: RollingUpdate
+          rollingUpdate:
+            unavailable: 1
+          initContainers:
+            builder:
+              order: 1
+              image:
+                repository: ghcr.io/gmarcy/homelab-matchbox-builder
+                tag: latest
+                pullPolicy: Always
+              args:
+                - '-e'
+                - 'data_path=/var/lib/matchbox'
+            coreos-butane-create-ignition:
+              order: 2
+              image:
+                repository: quay.io/coreos/butane
+                tag: release
+              args:
+                - '--pretty'
+                - '--strict'
+                - '-d'
+                - '/var/lib/matchbox/generic'
+                - '-o'
+                - '/var/lib/matchbox/generic/fedora-coreos-config.ign'
+                - '/var/lib/matchbox/generic/fedora-coreos-butane.yaml'
+            coreos-installer-download:
+              order: 2
+              image:
+                repository: quay.io/coreos/coreos-installer
+                tag: release
+              args:
+                - 'download'
+                - '-f'
+                - 'pxe'
+                - '-C'
+                - '/var/lib/matchbox/assets/fedora-coreos/download'
+            rename-coreos-assets:
+              order: 3
+              image:
+                repository: busybox
+                tag: 1.36
+              command:
+                - '/bin/sh'
+                - '-c'
+                - '/var/lib/matchbox/assets/fedora-coreos/download/rename_assets.sh'
+            coreos-installer-customize:
+              order: 4
+              image:
+                repository: quay.io/coreos/coreos-installer
+                tag: release
+              args:
+                - 'pxe'
+                - 'customize'
+                - '--pre-install'
+                - '/var/lib/matchbox/assets/fedora-coreos/pre-install/wipefs-partitions.sh'
+                - '--post-install'
+                - '/var/lib/matchbox/assets/fedora-coreos/post-install/efibootmgr-order-fix.sh'
+                - '--output'
+                - '/var/lib/matchbox/assets/fedora-coreos/fedora-coreos-live-initramfs.x86_64.img'
+                - '/var/lib/matchbox/assets/fedora-coreos/download/fedora-coreos-live-initramfs.x86_64.img'
+          containers:
+            main:
+              image:
+                repository: quay.io/poseidon/matchbox
+                tag: v0.10.0
+              env:
+                MATCHBOX_ADDRESS: "0.0.0.0:8080"
+                MATCHBOX_LOG_LEVEL: "debug"
+              ports:
+                - name: http
+                  containerPort: 8080
+              probes:
+                liveness:
+                  enabled: false
+                readiness:
+                  enabled: false
+                startup:
+                  enabled: false
+              resources:
+                requests:
+                  cpu: 30m
+                  memory: 20Mi
+                limits:
+                  cpu: 50m
+                  memory: 50Mi
+      defaultPodOptions:
+        automountServiceAccountToken: false
+        securityContext:
+          seccompProfile:
+            type: RuntimeDefault
+      persistence:
+        data:
+          enabled: true
+          type: persistentVolumeClaim
+          accessMode: ReadWriteOnce
+          size: 100Gi
+          globalMounts:
+            - path: /var/lib/matchbox
+      service:
+        main:
+          type: LoadBalancer
+          ports:
+            http:
+              port: 8080
+      ingress:
+        main:
+          enabled: true
+          annotations:
+            nginx.ingress.kubernetes.io/backend-protocol: HTTP
+            nginx.ingress.kubernetes.io/ssl-redirect: "false"
+          className: nginx
+          hosts:
+            - host: matchbox.xxx.xxx.xxx.xxx.nip.io
+              paths:
+                - path: /
+                  service:
+                    name: main
+            - host: matchbox.192.168.222.254.nip.io
+              paths:
+                - path: /
+                  service:
+                    name: main

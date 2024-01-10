@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: HTTP
+  name: openshift-console
+  namespace: openshift-console
+spec:
+  ingressClassName: nginx
+  rules:
+  # kustomize will replace this with the cluster ip address
+  - host: console.xxx.xxx.xxx.xxx.nip.io
+    http:
+      paths:
+      - backend:
+          service:
+            name: openshift-console
+            port:
+              name: http
+        path: /
+        pathType: Prefix

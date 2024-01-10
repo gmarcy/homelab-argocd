@@ -1,0 +1,14 @@
+app:
+  label: kubernetes-dashboard
+  name: dashboard
+cluster:
+  name: argocd-cluster
+destination:
+  namespace: kubernetes-dashboard
+  server: https://kubernetes.default.svc
+project:
+  name: default
+source:
+  path: dashboard/overlays/argocd-cluster
+  repoURL: https://github.com/gmarcy/homelab-argocd.git
+  targetRevision: HEAD

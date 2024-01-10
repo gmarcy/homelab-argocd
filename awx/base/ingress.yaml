@@ -1,0 +1,29 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: awx
+  namespace: awx
+  annotations:
+    nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
+    nginx.ingress.kubernetes.io/backend-protocol: HTTP
+  labels:
+    app.kubernetes.io/name: awx
+    app.kubernetes.io/part-of: awx
+spec:
+  ingressClassName: nginx
+  rules:
+    # kustomize will replace this with the cluster ip address
+    - host: awx.xxx.xxx.xxx.xxx.nip.io
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: awx-service
+                port:
+                  number: 80
+  tls:
+    # kustomize will add hosts
+    - hosts: []

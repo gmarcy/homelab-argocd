@@ -1,0 +1,26 @@
+apiVersion: nmstate.io/v1
+kind: NodeNetworkConfigurationPolicy
+metadata:
+  name: ethernet
+  namespace: nmstate
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+spec:
+  desiredState:
+    interfaces:
+    - name: eno1
+      type: ethernet
+      state: up
+      ipv4:
+        address:
+        - ip: 192.168.222.214
+          prefix-length: 24
+        enabled: true
+    - name: enp0s20f0u1
+      type: ethernet
+      state: up
+      ipv4:
+        address:
+        - ip: 192.168.123.214
+          prefix-length: 24
+        enabled: true

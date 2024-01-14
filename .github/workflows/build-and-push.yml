@@ -1,0 +1,35 @@
+name: Create and publish a Docker image
+
+on:
+  push:
+    branches: ['main']
+
+env:
+  GHCR_IO_USER: ${{ github.actor }}
+  GHCR_IO_TOKEN: ${{ github.token }}
+  REPO_NAME: ${{ github.repository }}
+  IMAGE_NAME: ${{ github.repository }}-cmp-sidecar
+
+jobs:
+  build-and-push-image:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Docker logins
+        run: |
+          docker login -u="$GHCR_IO_USER" -p="$GHCR_IO_TOKEN" ghcr.io
+      - name: Get current date
+        id: date
+        run: echo "date=$(date -u +'%Y-%m-%d-%H-%M-%S')" >> $GITHUB_OUTPUT
+      - name: Build the Docker image
+        run: docker build --tag ghcr.io/$IMAGE_NAME:${{ steps.date.outputs.date }} .
+      - name: Docker Push
+        run: |
+          docker push ghcr.io/$IMAGE_NAME:${{ steps.date.outputs.date }}
+          docker tag ghcr.io/$IMAGE_NAME:${{ steps.date.outputs.date }} ghcr.io/$IMAGE_NAME:latest
+          docker push ghcr.io/$IMAGE_NAME:latest

@@ -40,7 +40,10 @@ spec:
         repoURL: '{{ source.repoURL }}'
         targetRevision: '{{ source.targetRevision }}'
         plugin:
-          name: kustomize-build-with-helm
+          name: kustomize-build-with-helm-and-avp
+          env:
+          - name: AVP_TYPE
+            value: kubernetessecret
       syncPolicy:
         automated:
           allowEmpty: true

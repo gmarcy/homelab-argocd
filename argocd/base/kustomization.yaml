@@ -3,18 +3,94 @@ kind: Kustomization
 namespace: argocd
 
 resources:
-  - https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
   - application-set.yaml
   - homelab-project.yaml
-  - ingress.yaml
   - namespace.yaml
 
-configMapGenerator:
-  - behavior: merge
-    literals:
-      - timeout.reconciliation="30s"
-    name: argocd-cm
-  - behavior: merge
-    literals:
-      - server.insecure="true"
-    name: argocd-cmd-params-cm
+helmCharts:
+  - name: argo-cd
+    repo: https://argoproj.github.io/argo-helm
+    releaseName: argocd
+    namespace: argocd
+    version: 5.52.1
+    valuesInline:
+      openshift:
+        enabled: false
+      crds:
+        install: true
+      global:
+        networkPolicy:
+          create: true
+      configs:
+        cm:
+          timeout.reconciliation: 30s
+        params:
+          server.insecure: true
+        cmp:
+          create: true
+          plugins:
+            kustomize-build-with-helm-and-avp:
+              allowConcurrency: true
+              generate:
+                command:
+                  - sh
+                  - -c
+                  - kustomize build . --enable-helm | argocd-vault-plugin generate -
+              lockRepo: false
+      controller:
+        metrics:
+          enabled: true
+      dex:
+        metrics:
+          enabled: true
+      redis:
+        metrics:
+          enabled: false
+      server:
+        metrics:
+          enabled: true
+        ingress:
+          enabled: true
+          ingressClassName: nginx
+          hosts:
+            - argocd.xxx.xxx.xxx.xxx.nip.io
+          tls:
+            - hosts: []
+              secretName: argocd-secret
+      repoServer:
+        extraContainers:
+          - name: kustomize-build-with-helm-and-avp
+            command:
+              - "/var/run/argocd/argocd-cmp-server"
+            image: ghcr.io/gmarcy/homelab-argocd-cmp-sidecar:latest
+            securityContext:
+              runAsNonRoot: true
+              runAsUser: 999
+            volumeMounts:
+              - mountPath: /var/run/argocd
+                name: var-files
+              - mountPath: /home/argocd/cmp-server/plugins
+                name: plugins
+              - mountPath: /home/argocd/cmp-server/config/plugin.yaml
+                subPath: kustomize-build-with-helm-and-avp.yaml
+                name: argocd-cmp-cm
+              - mountPath: /tmp
+                name: cmp-tmp
+        volumes:
+          - configMap:
+              name: argocd-cmp-cm
+            name: argocd-cmp-cm
+          - emptyDir: {}
+            name: cmp-tmp
+        metrics:
+          enabled: true
+      applicationSet:
+        metrics:
+          enabled: true
+        webhook:
+          ingress:
+            enabled: false
+            ingressClassName: nginx
+      notifications:
+        metrics:
+          enabled: true

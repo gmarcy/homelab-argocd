@@ -1,0 +1,14 @@
+app:
+  label: ocm
+  name: ocm
+cluster:
+  name: argocd-cluster
+destination:
+  namespace: open-cluster-management
+  server: https://kubernetes.default.svc
+project:
+  name: default
+source:
+  path: ocm/overlays/argocd-cluster
+  repoURL: https://github.com/gmarcy/homelab-argocd.git
+  targetRevision: HEAD

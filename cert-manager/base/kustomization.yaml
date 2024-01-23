@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - clusterissuer.yaml
   - namespace.yaml
+  - secret.yaml
 
 helmCharts:
   - name: cert-manager
@@ -16,6 +17,22 @@ helmCharts:
       global:
         leaderElection:
           namespace: cert-manager
+  - name: homelab-cert-manager-webhook
+    repo: https://gmarcy.github.io/helm-charts
+    releaseName: homelab-cert-manager-webhook
+    namespace: cert-manager
+    version: v0.1.0
+    valuesInline:
+      replicaCount: 1
+      image:
+        pullPolicy: Always
+  - name: homelab-letsencrypt-issuers
+    repo: https://gmarcy.github.io/helm-charts
+    releaseName: homelab-letsencrypt-issuers
+    namespace: cert-manager
+    version: v0.1.0
+    valuesInline:
+      secret: homelab-namecheap-credentials
 
 patches:
   - patch: |-

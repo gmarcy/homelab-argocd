@@ -7,15 +7,25 @@ metadata:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 spec:
   desiredState:
+    dns-resolver:
+      config:
+        server:
+        - 192.168.222.253
+        - 8.8.8.8
+        search:
+        - lab.gmarcy.com
+    hostname:
+      config: netsvcs
     interfaces:
     - name: enp2s0
-      type: ethernet
       state: up
+      type: ethernet
       ipv4:
         address:
         - ip: 192.168.222.253
           prefix-length: 24
         enabled: true
+        dhcp: false
     - name: enp3s0
       type: ethernet
       state: up
@@ -24,6 +34,7 @@ spec:
         - ip: 192.168.111.253
           prefix-length: 21
         enabled: true
+        dhcp: false
     - name: enp4s0
       type: ethernet
       state: up
@@ -32,3 +43,14 @@ spec:
         - ip: 192.168.123.253
           prefix-length: 24
         enabled: true
+        dhcp: false
+    routes:
+      config:
+        - destination: 0.0.0.0/0
+          metric: 100
+          next-hop-address: 192.168.222.1
+          next-hop-interface: enp2s0
+        - destination: 0.0.0.0/0
+          metric: 101
+          next-hop-address: 192.168.111.1
+          next-hop-interface: enp3s0

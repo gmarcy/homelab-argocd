@@ -864,7 +864,7 @@ spec:
     leaseTime: 24h
   - ip: 192.168.123.253
     macs:
-    - 34:1a:4c:03:45:26
+    - 34:1a:4c:03:45:25
     setTags:
     - net123
     hostname: netsvcs.ipmi.gmarcy.com

@@ -3,10 +3,10 @@ kind: Kustomization
 namespace: nmstate
 
 resources:
-  - https://github.com/nmstate/kubernetes-nmstate/releases/download/v0.80.1/nmstate.io_nmstates.yaml
-  - https://github.com/nmstate/kubernetes-nmstate/releases/download/v0.80.1/namespace.yaml
-  - https://github.com/nmstate/kubernetes-nmstate/releases/download/v0.80.1/service_account.yaml
-  - https://github.com/nmstate/kubernetes-nmstate/releases/download/v0.80.1/role.yaml
-  - https://github.com/nmstate/kubernetes-nmstate/releases/download/v0.80.1/role_binding.yaml
-  - https://github.com/nmstate/kubernetes-nmstate/releases/download/v0.80.1/operator.yaml
+  - https://github.com/nmstate/kubernetes-nmstate/releases/download/v0.81.0/nmstate.io_nmstates.yaml
+  - https://github.com/nmstate/kubernetes-nmstate/releases/download/v0.81.0/namespace.yaml
+  - https://github.com/nmstate/kubernetes-nmstate/releases/download/v0.81.0/service_account.yaml
+  - https://github.com/nmstate/kubernetes-nmstate/releases/download/v0.81.0/role.yaml
+  - https://github.com/nmstate/kubernetes-nmstate/releases/download/v0.81.0/role_binding.yaml
+  - https://github.com/nmstate/kubernetes-nmstate/releases/download/v0.81.0/operator.yaml
   - nmstate.yaml

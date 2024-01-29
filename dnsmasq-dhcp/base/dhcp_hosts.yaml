@@ -689,7 +689,7 @@ spec:
     leaseTime: 24h
   - ip: 192.168.111.101
     macs:
-    - 80:3f:5d:05:12:1a
+    - 34:99:71:d6:b1:4a
     setTags:
     - net111
     hostname: GMarcy-MBP.home.glenn4u.com

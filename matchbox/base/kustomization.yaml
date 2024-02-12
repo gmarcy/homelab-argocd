@@ -5,6 +5,11 @@ namespace: matchbox
 resources:
   - namespace.yaml
 
+configMapGenerator:
+  - name: matchbox-config
+    files:
+      - inventory.yaml
+
 helmCharts:
   - name: app-template
     repo: https://bjw-s.github.io/helm-charts/
@@ -25,6 +30,8 @@ helmCharts:
                 tag: latest
                 pullPolicy: Always
               args:
+                - '-i'
+                - '/var/lib/matchbox-config/inventory.yaml'
                 - '-e'
                 - 'data_path=/var/lib/matchbox'
             coreos-butane-create-ignition:
@@ -113,6 +120,12 @@ helmCharts:
           size: 100Gi
           globalMounts:
             - path: /var/lib/matchbox
+        config:
+          enabled: true
+          type: configMap
+          name: matchbox-config
+          globalMounts:
+            - path: /var/lib/matchbox-config
       service:
         main:
           type: LoadBalancer

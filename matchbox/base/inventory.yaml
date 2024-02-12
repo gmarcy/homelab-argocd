@@ -1,0 +1,168 @@
+---
+
+all:
+  children:
+    assets:
+      hosts:
+        hosted-assets:
+          directory_list:
+            - '/centos-9-stream/images/pxeboot'
+          get_url_list:
+            - url: 'https://mirror.stream.centos.org/9-stream/BaseOS/x86_64/os/images/pxeboot/vmlinuz'
+              dest: '/centos-9-stream/images/pxeboot/vmlinuz'
+              mode: '0644'
+            - url: 'https://mirror.stream.centos.org/9-stream/BaseOS/x86_64/os/images/pxeboot/initrd.img'
+              dest: '/centos-9-stream/images/pxeboot/initrd.img'
+              mode: '0644'
+    profiles:
+      hosts:
+        assisted-installer:
+          id: assisted-install
+          name: assisted-install
+          ipxe_template: assisted.ipxe
+        centos-9-stream:
+          id: centos-9-stream-install
+          name: centos-9-stream-install
+          ipxe_template: matchbox.ipxe
+          generic_id: centos-9-stream-kickstart.conf
+          boot:
+            kernel: http://mirror.stream.centos.org/9-stream/BaseOS/x86_64/os/images/pxeboot/vmlinuz
+            initrd:
+              - http://mirror.stream.centos.org/9-stream/BaseOS/x86_64/os/images/pxeboot/initrd.img
+            args:
+              - initrd=initrd.img
+              - inst.sshd=1
+              - ip=dhcp
+              - inst.ks=http://matchbox.192.168.222.254.nip.io/generic?uuid=${uuid}&mac=${mac:hexhyp}
+          assets:
+          - name:
+            content:
+        fedora-coreos:
+          id: fedora-coreos-install
+          name: fedora-coreos-install
+          ipxe_template: matchbox.ipxe
+          generic_id: fedora-coreos-config.ign
+          boot:
+            kernel: /assets/fedora-coreos/fedora-coreos-live-kernel-x86_64
+            initrd:
+              - --name main /assets/fedora-coreos/fedora-coreos-live-initramfs.x86_64.img
+            args:
+              - initrd=main
+              - ignition.firstboot
+              - ignition.platform.id=metal
+              - coreos.live.rootfs_url=http://matchbox.192.168.222.254.nip.io/assets/fedora-coreos/fedora-coreos-live-rootfs.x86_64.img
+              - coreos.inst.install_dev=/dev/{{ bootdev }}
+              - coreos.inst.ignition_url=http://matchbox.192.168.222.254.nip.io/generic?uuid=${uuid}&mac=${mac:hexhyp}
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+    ansible_host: localhost
+    ansible_connection: local
+    ssh_authorized_keys:
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAsdgW20NtVSpXRSmC5cjEKTN+p9Ju01EdPYHdtwqmyp homelab@gmarcy.com
+    server_name: "{{ inventory_hostname }}"
+    domain_name: "{{ inventory_hostname + '.lab.gmarcy.com' }}"
+    groups_template:
+      id: '{{ inventory_hostname }}-install'
+      name: Install OS on {{ inventory_hostname }}
+      profile: '{{ inventory_hostname }}-install'
+      selector:
+        mac: '{{ macaddr }}'
+      metadata:
+        server_name: '{{ inventory_hostname }}'
+        domain_name: '{{ inventory_hostname }}.lab.gmarcy.com'
+        boot_drive: '{{ bootdev }}'
+        ssh_authorized_keys: "{{ ssh_authorized_keys }}"
+    profiles_template:
+      id: "{{ hostvars[profile].id }}"
+      name: "{{ hostvars[profile].name }}"
+      generic_id: "{{ hostvars[profile].generic_id if hostvars[profile].generic_id is defined else '' }}"
+      boot: "{{ hostvars[profile].boot if hostvars[profile].boot is defined else {} }}"
+  hosts:
+    may0:
+      macaddr: 00-e0-4c-0d-e8-3d
+      bootdev: sda
+      profile: fedora-coreos
+    may1:
+      macaddr: 00-e0-4c-0d-ed-31
+      bootdev: sda
+      profile: fedora-coreos
+    may2:
+      macaddr: 00-e0-4c-0d-ed-17
+      bootdev: sda
+      profile: fedora-coreos
+    may3:
+      macaddr: 00-e0-4c-0d-dd-1e
+      bootdev: sda
+      profile: fedora-coreos
+    netsvcs:
+      macaddr: 34-1a-4c-03-45-23
+      bootdev: nvme0n1
+      profile: fedora-coreos
+    nuc10:
+      macaddr: 1c-69-7a-6d-29-43
+      bootdev: nvme0n1
+      profile: fedora-coreos
+    nuc8:
+      macaddr: 1c-69-7a-6b-18-d3
+      bootdev: nvme0n1
+      profile: fedora-coreos
+    p3:
+      macaddr: 04-7b-cb-a8-57-b6
+      bootdev: nvme0n1
+      profile: fedora-coreos
+    p340:
+      macaddr: 04-7c-16-28-92-06
+      bootdev: nvme0n1
+      profile: fedora-coreos
+    p360:
+      macaddr: 9c-2d-cd-5b-cd-60
+      bootdev: nvme0n1
+      profile: centos-9-stream
+    server0:
+      macaddr: 3c-ec-ef-44-bf-f0
+      bootdev: nvme0n1
+      profile: fedora-coreos
+    server1:
+      macaddr: 3c-ec-ef-44-ec-6a
+      bootdev: nvme0n1
+      profile: fedora-coreos
+    server2:
+      macaddr: 3c-ec-ef-44-ed-90
+      bootdev: nvme0n1
+      profile: fedora-coreos
+    server3:
+      macaddr: 3c-ec-ef-44-ec-f2
+      bootdev: nvme0n1
+      profile: fedora-coreos
+    server4:
+      macaddr: 3c-ec-ef-44-ec-38
+      bootdev: nvme0n1
+      profile: fedora-coreos
+    server5:
+      macaddr: 3c-ec-ef-6b-c6-72
+      bootdev: nvme0n1
+      profile: fedora-coreos
+    server6:
+      macaddr: 3c-ec-ef-6b-c7-56
+      bootdev: nvme0n1
+      profile: fedora-coreos
+    server7:
+      macaddr: 3c-ec-ef-6b-c6-86
+      bootdev: nvme0n1
+      profile: fedora-coreos
+    th80a:
+      macaddr: 58-47-ca-70-18-13
+      bootdev: nvme0n1
+      profile: fedora-coreos
+    th80b:
+      macaddr: 58-47-ca-70-15-b8
+      bootdev: nvme0n1
+      profile: fedora-coreos
+    th80c:
+      macaddr: 58-47-ca-70-15-c3
+      bootdev: nvme0n1
+      profile: fedora-coreos
+    um690:
+      macaddr: 58-47-ca-70-5b-39
+      bootdev: nvme0n1
+      profile: fedora-coreos

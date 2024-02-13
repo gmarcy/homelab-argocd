@@ -50,6 +50,7 @@ spec:
             value: kubernetessecret
       syncPolicy:
         syncOptions:
+          - CreateNamespace=true
           - RespectIgnoreDifferences=true
         automated:
           allowEmpty: true

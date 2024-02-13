@@ -34,6 +34,10 @@ spec:
         jsonPointers:
         - /status
         kind: Application
+      - group: apps
+        jsonPointers:
+        - /spec/replicas
+        kind: Deployment
       project: '{{ project.name }}'
       source:
         path: '{{ source.path }}'
@@ -45,6 +49,8 @@ spec:
           - name: AVP_TYPE
             value: kubernetessecret
       syncPolicy:
+        syncOptions:
+          - RespectIgnoreDifferences=true
         automated:
           allowEmpty: true
           prune: true

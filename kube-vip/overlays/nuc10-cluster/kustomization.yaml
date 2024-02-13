@@ -17,7 +17,7 @@ patches:
   - patch: |-
       - op: replace
         path: /data/cidr-global
-        value: 192.168.222.254/32
+        value: 192.168.210.254/32
     target:
       version: v1
       kind: ConfigMap

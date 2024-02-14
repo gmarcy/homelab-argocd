@@ -152,15 +152,15 @@ all:
       profile: fedora-coreos
     th80a:
       macaddr: 58-47-ca-70-18-13
-      bootdev: nvme0n1
+      bootdev: disk/by-path/pci-0000:01:00.0-nvme-1
       profile: fedora-coreos
     th80b:
       macaddr: 58-47-ca-70-15-b8
-      bootdev: nvme0n1
+      bootdev: disk/by-path/pci-0000:01:00.0-nvme-1
       profile: fedora-coreos
     th80c:
       macaddr: 58-47-ca-70-15-c3
-      bootdev: nvme0n1
+      bootdev: disk/by-path/pci-0000:01:00.0-nvme-1
       profile: fedora-coreos
     um690:
       macaddr: 58-47-ca-70-5b-39

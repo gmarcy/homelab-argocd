@@ -44,6 +44,15 @@ spec:
           prefix-length: 24
         enabled: true
         dhcp: false
+    - name: enp5s0
+      type: ethernet
+      state: up
+      ipv4:
+        address:
+        - ip: 192.168.234.253
+          prefix-length: 24
+        enabled: true
+        dhcp: false
     routes:
       config:
         - destination: 0.0.0.0/0

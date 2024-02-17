@@ -1,9 +1,5 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: netbootxyz
-
-resources:
-  - namespace.yaml
 
 configMapGenerator:
   - name: netbootxyz-setup
@@ -14,8 +10,6 @@ configMapGenerator:
         mv /config/buildout /config/menus/remote
         mkdir -p /config/menus/local /config/nginx/site-confs
         touch /config/nginx/site-confs/default
-generatorOptions:
-  disableNameSuffixHash: true
 
 helmCharts:
   - name: app-template
@@ -58,7 +52,7 @@ helmCharts:
                   - path: /config
               - name: assets
                 accessMode: ReadWriteOnce
-                size: 20Gi
+                size: 2Gi
                 globalMounts:
                   - path: /assets
       defaultPodOptions:

@@ -1083,83 +1083,90 @@ spec:
     macs:
     - 74:83:c2:fa:3c:44
     setTags:
-    - net111
+    - net234
     hostname: es-16-xg.lab10g.gmarcy.com
     leaseTime: 24h
   - ip: 192.168.234.200
     macs:
     - 3c:ec:ef:44:c7:94
     setTags:
-    - net111
+    - net234
     hostname: server0.lab10g.gmarcy.com
     leaseTime: 24h
   - ip: 192.168.234.201
     macs:
     - 3c:ec:ef:44:ef:1c
     setTags:
-    - net111
+    - net234
     hostname: server1.lab10g.gmarcy.com
     leaseTime: 24h
   - ip: 192.168.234.202
     macs:
     - 3c:ec:ef:44:ed:fa
     setTags:
-    - net111
+    - net234
     hostname: server2.lab10g.gmarcy.com
     leaseTime: 24h
   - ip: 192.168.234.203
     macs:
     - 3c:ec:ef:44:ee:96
     setTags:
-    - net111
+    - net234
     hostname: server3.lab10g.gmarcy.com
     leaseTime: 24h
   - ip: 192.168.234.204
     macs:
     - 3c:ec:ef:44:ef:4e
     setTags:
-    - net111
+    - net234
     hostname: server4.lab10g.gmarcy.com
     leaseTime: 24h
   - ip: 192.168.234.205
     macs:
     - 3c:ec:ef:6b:c8:10
     setTags:
-    - net111
+    - net234
     hostname: server5.lab10g.gmarcy.com
     leaseTime: 24h
   - ip: 192.168.234.206
     macs:
     - 3c:ec:ef:6b:c8:f4
     setTags:
-    - net111
+    - net234
     hostname: server6.lab10g.gmarcy.com
     leaseTime: 24h
   - ip: 192.168.234.207
     macs:
     - 3c:ec:ef:6b:c8:24
     setTags:
-    - net111
+    - net234
     hostname: server7.lab10g.gmarcy.com
     leaseTime: 24h
   - ip: 192.168.234.210
     macs:
     - a0:ce:c8:da:7b:1a
     setTags:
-    - net111
+    - net234
     hostname: nuc.lab10g.gmarcy.com
     leaseTime: 24h
   - ip: 192.168.234.212
     macs:
     - a0:ce:c8:d9:c7:4b
     setTags:
-    - net111
+    - net234
     hostname: nuc8.lab10g.gmarcy.com
     leaseTime: 24h
   - ip: 192.168.234.214
     macs:
     - a0:ce:c8:da:7c:97
     setTags:
-    - net111
+    - net234
     hostname: nuc10.lab10g.gmarcy.com
+    leaseTime: 24h
+  - ip: 192.168.234.253
+    macs:
+    - 34:1a:4c:03:45:26
+    setTags:
+    - net234
+    hostname: netsvcs.lab10g.gmarcy.com
     leaseTime: 24h

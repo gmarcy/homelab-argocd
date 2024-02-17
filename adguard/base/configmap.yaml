@@ -24,6 +24,7 @@ data:
         - 192.168.111.253
         - 192.168.123.253
         - 192.168.222.253
+        - 192.168.234.253
       port: 53
       anonymize_client_ip: false
       ratelimit: 20
@@ -503,6 +504,8 @@ data:
           answer: 192.168.234.214
         - domain: RamseyHillCloud.lab10g.gmarcy.com
           answer: 192.168.234.222
+        - domain: netsvcs.lab10g.gmarcy.com
+          answer: 192.168.234.253
       safebrowsing_cache_size: 1048576
       safesearch_cache_size: 1048576
       parental_cache_size: 1048576

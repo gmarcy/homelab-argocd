@@ -28,6 +28,10 @@ spec:
     - net111
     values:
     - home.glenn4u.com
+  - key: option:router
+    tags:
+    - net123
+    values: []
   - key: option:dns-server
     tags:
     - net123
@@ -68,6 +72,10 @@ spec:
     - net222
     values:
     - lab.gmarcy.com
+  - key: option:router
+    tags:
+    - net234
+    values: []
   - key: option:dns-server
     tags:
     - net234

@@ -31,6 +31,7 @@ spec:
         - --interface=enp2s0
         - --interface=enp3s0
         - --interface=enp4s0
+        - --interface=enp5s0
         - --except-interface=lo
         - --no-resolv
         - --log-queries

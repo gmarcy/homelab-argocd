@@ -40,7 +40,6 @@ spec:
     values:
     - tag:ipxe
     - ipxe/netboot.xyz.kpxe
-    - nuc
     - 192.168.222.210
   - key: dhcp-match
     values:
@@ -66,5 +65,4 @@ spec:
     values:
     - tag:net222
     - ipxe/netboot.xyz.kpxe
-    - nuc
     - 192.168.222.210

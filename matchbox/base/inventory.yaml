@@ -2,6 +2,29 @@
 
 all:
   children:
+    configmap:
+      hosts:
+        matchbox-config:
+          directory_list:
+          - assets/fedora-coreos/download
+          - assets/nbxyz
+          - assets/nbxyz/pxelinux.cfg
+          - generic
+          - groups
+          - profiles
+          file_list:
+          - src: assisted.ipxe
+            dest: assets/nbxyz/assisted.ipxe
+          - src: dualboot.ipxe
+            dest: assets/nbxyz/dualboot.ipxe
+          - src: matchbox.ipxe
+            dest: assets/nbxyz/matchbox.ipxe
+          - src: menu.ipxe
+            dest: assets/nbxyz/menu.ipxe
+          - src: nbxyzmenu.ipxe
+            dest: assets/nbxyz/nbxyzmenu.ipxe
+          - src: centos-9-stream-kickstart.conf
+            dest: generic/centos-9-stream-kickstart.conf
     assets:
       hosts:
         hosted-assets:

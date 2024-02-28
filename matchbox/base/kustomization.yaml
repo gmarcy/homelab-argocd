@@ -8,7 +8,18 @@ resources:
 configMapGenerator:
   - name: matchbox-config
     files:
+      - assets/fedora-coreos/download/rename_assets.sh
+      - assets/fedora-coreos/post-install/efibootmgr-order-fix.sh
+      - assets/fedora-coreos/pre-install/wipefs-partitions.sh
+      - assets/nbxyz/assisted.ipxe
+      - assets/nbxyz/dualboot.ipxe
+      - assets/nbxyz/matchbox.ipxe
+      - assets/nbxyz/menu.ipxe
+      - assets/nbxyz/nbxyzmenu.ipxe
+      - generic/centos-9-stream-kickstart.conf
+      - generic/fedora-coreos-butane.yaml
       - inventory.yaml
+      - playbook.yaml
 
 helmCharts:
   - name: app-template
@@ -26,12 +37,14 @@ helmCharts:
             builder:
               order: 1
               image:
-                repository: ghcr.io/gmarcy/homelab-matchbox-builder
+                repository: ghcr.io/gmarcy/ansible-automation
                 tag: latest
                 pullPolicy: Always
               args:
+                - '-vvv'
                 - '-i'
                 - '/var/lib/matchbox-config/inventory.yaml'
+                - '/var/lib/matchbox-config/playbook.yaml'
                 - '-e'
                 - 'data_path=/var/lib/matchbox'
             coreos-butane-create-ignition:
@@ -46,7 +59,7 @@ helmCharts:
                 - '/var/lib/matchbox/generic'
                 - '-o'
                 - '/var/lib/matchbox/generic/fedora-coreos-config.ign'
-                - '/var/lib/matchbox/generic/fedora-coreos-butane.yaml'
+                - '/var/lib/matchbox-config/fedora-coreos-butane.yaml'
             coreos-installer-download:
               order: 2
               image:
@@ -65,8 +78,8 @@ helmCharts:
                 tag: 1.36
               command:
                 - '/bin/sh'
-                - '-c'
-                - '/var/lib/matchbox/assets/fedora-coreos/download/rename_assets.sh'
+                - '/var/lib/matchbox-config/rename_assets.sh'
+                - '/var/lib/matchbox/assets/fedora-coreos/download'
             coreos-installer-customize:
               order: 4
               image:
@@ -76,9 +89,9 @@ helmCharts:
                 - 'pxe'
                 - 'customize'
                 - '--pre-install'
-                - '/var/lib/matchbox/assets/fedora-coreos/pre-install/wipefs-partitions.sh'
+                - '/var/lib/matchbox-config/wipefs-partitions.sh'
                 - '--post-install'
-                - '/var/lib/matchbox/assets/fedora-coreos/post-install/efibootmgr-order-fix.sh'
+                - '/var/lib/matchbox-config/efibootmgr-order-fix.sh'
                 - '--output'
                 - '/var/lib/matchbox/assets/fedora-coreos/fedora-coreos-live-initramfs.x86_64.img'
                 - '/var/lib/matchbox/assets/fedora-coreos/download/fedora-coreos-live-initramfs.x86_64.img'
@@ -140,6 +153,7 @@ helmCharts:
             nginx.ingress.kubernetes.io/ssl-redirect: "false"
           className: nginx
           hosts:
+            # kustomize will replace this with the cluster ip address
             - host: matchbox.xxx.xxx.xxx.xxx.nip.io
               paths:
                 - path: /

@@ -4,86 +4,81 @@ namespace: adguard
 
 resources:
   - configmap.yaml
-  - namespace.yaml
-  - pvc.yaml
 
 helmCharts:
   - name: app-template
     repo: https://bjw-s.github.io/helm-charts/
     releaseName: adguard
     namespace: adguard
-    version: 1.5.1 # 2.4.0
+    version: 2.4.0
     valuesInline:
-      image:
-        repository: adguard/adguardhome
-        tag: v0.107.43
-        pullPolicy: IfNotPresent
-      initContainers:
-        copy:
-          image: busybox:1.36
-          command:
-            - /bin/sh
-            - -c
-            - cp /config/*.yaml /opt/adguardhome/conf/
-          volumeMounts:
-            - name: conf
-              mountPath: /config/
-            - name: data
+      controllers:
+        main:
+          initContainers:
+            copy:
+              image:
+                repository: busybox
+                tag: 1.36
+              command:
+                - /bin/sh
+                - -c
+                - cp /config/*.yaml /opt/adguardhome/conf/
+          containers:
+            main:
+              image:
+                repository: adguard/adguardhome
+                tag: v0.107.43
+                pullPolicy: IfNotPresent
+              probes:
+                liveness:
+                  enabled: false
+                readiness:
+                  enabled: false
+                startup:
+                  enabled: false
+              securityContext:
+                privileged: true
+      defaultPodOptions:
+        automountServiceAccountToken: false
+      persistence:
+        data:
+          enabled: true
+          type: persistentVolumeClaim
+          accessMode: ReadWriteOnce
+          size: 1Gi
+          globalMounts:
+            - path: /opt/adguardhome/work
+              subPath: work
+            - path: /opt/adguardhome/conf
               subPath: conf
-              mountPath: /opt/adguardhome/conf
-      probes:
-        liveness:
-          enabled: false
-        readiness:
-          enabled: false
-        startup:
-          enabled: false
-      securityContext:
-        privileged: true
+        conf:
+          enabled: true
+          type: configMap
+          name: adguard-config
+          globalMounts:
+            - path: /config
       service:
         main:
-          enabled: true
           ports:
             http:
               port: 3080
-              protocol: TCP
-      hostNetwork: true
+        dns:
+          controller: main
+          ports:
+            dns:
+              port: 3053
+              protocol: UDP
       ingress:
         main:
           enabled: true
-          ingressClassName: nginx
           annotations:
             nginx.ingress.kubernetes.io/backend-protocol: HTTP
+            nginx.ingress.kubernetes.io/ssl-redirect: "false"
+          className: nginx
           hosts:
             # kustomize will replace this with the cluster ip address
             - host: adguard.xxx.xxx.xxx.xxx.nip.io
               paths:
                 - path: /
-                  pathType: Prefix
-      persistence:
-        conf:
-          enabled: true
-          type: configMap
-          name: adguard-config
-          mountPath: "-"
-        data:
-          enabled: true
-          existingClaim: adguard
-          mountPath: /opt/adguardhome/work
-          subpath: work
-
-patches:
-  - patch: |-
-      - op: remove
-        path: /spec/template/spec/containers/0/ports
-      - op: add
-        path: /spec/template/spec/containers/0/volumeMounts/0/subPath
-        value: work
-      - op: add
-        path: /spec/template/spec/containers/0/volumeMounts/-
-        value: { mountPath: /opt/adguardhome/conf, name: data, subPath: conf }
-    target:
-      group: apps
-      version: v1
-      kind: Deployment
-      name: adguard
+                  service:
+                    name: main

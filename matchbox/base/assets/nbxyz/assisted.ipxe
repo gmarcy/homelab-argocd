@@ -1,0 +1,7 @@
+#!ipxe
+
+echo Attempting to boot from assisted ipxe server with MAC ${mac:hexhyp}
+sleep 5
+chain http://assisted.lab.gmarcy.com:9080/${mac:hexhyp}/boot.ipxe
+echo FAILED to boot from assisted ipxe server with MAC ${mac:hexhyp}
+sleep 5

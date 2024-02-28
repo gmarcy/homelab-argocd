@@ -3,3 +3,55 @@ kind: Kustomization
 
 resources:
   - ../../base
+
+patches:
+  - patch: |-
+      - op: add
+        path: /spec/template/spec/containers/0/args/-
+        value: "--interface=eno1"
+      - op: add
+        path: /spec/template/spec/containers/0/args/-
+        value: "--interface=enp0s20f0u1"
+      - op: add
+        path: /spec/template/spec/containers/0/args/-
+        value: "--interface=enp0s20f0u2"
+    target:
+      group: apps
+      version: v1
+      kind: Deployment
+  - patch: |-
+      - op: add
+        path: /spec/options/-
+        value:
+          key: option:tftp-server
+          tags:
+          - net222
+          values:
+          - 192.168.222.214
+    target:
+      group: dnsmasq.kvaps.cf
+      version: v1beta1
+      kind: DhcpOptions
+  - patch: |-
+      - op: add
+        path: /spec/options/-
+        value:
+          key: dhcp-boot
+          values:
+          - tag:ipxe
+          - ipxe/netboot.xyz.kpxe
+          - 192.168.222.214
+          - 192.168.222.214
+      - op: add
+        path: /spec/options/-
+        value:
+          key: dhcp-boot
+          values:
+          - tag:net222
+          - ipxe/netboot.xyz.kpxe
+          - 192.168.222.214
+          - 192.168.222.214
+    target:
+      group: dnsmasq.kvaps.cf
+      version: v1beta1
+      kind: DnsmasqOptions

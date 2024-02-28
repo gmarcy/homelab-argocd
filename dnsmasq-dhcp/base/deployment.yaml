@@ -1,25 +1,23 @@
 ---
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: dnsmasq-controller-dhcp
+  name: dnsmasq-controller
   namespace: dnsmasq-dhcp
   labels:
-    app: dnsmasq-controller-dhcp
+    app: dnsmasq-controller
 spec:
   selector:
     matchLabels:
-      app: dnsmasq-controller-dhcp
+      app: dnsmasq-controller
   template:
     metadata:
       labels:
-        app: dnsmasq-controller-dhcp
+        app: dnsmasq-controller
     spec:
-      hostNetwork: true
       containers:
       - name: dnsmasq-dhcp
-        image: ghcr.io/gmarcy/dnsmasq-controller:2023-11-26-18-41-44
+        image: ghcr.io/gmarcy/dnsmasq-controller:2024-02-23-17-06-12
         securityContext:
           capabilities:
             add: ["NET_ADMIN"]
@@ -28,10 +26,6 @@ spec:
         - --metrics-addr=:0
         - --dhcp
         - --
-        - --interface=enp2s0
-        - --interface=enp3s0
-        - --interface=enp4s0
-        - --interface=enp5s0
         - --except-interface=lo
         - --no-resolv
         - --log-queries
@@ -48,8 +42,9 @@ spec:
           requests:
             cpu: 100m
             memory: 20Mi
+      hostNetwork: true
       priorityClassName: system-node-critical
-      serviceAccountName: dnsmasq-controller-dhcp
+      serviceAccountName: dnsmasq-controller
       terminationGracePeriodSeconds: 10
       tolerations:
       - effect: NoSchedule

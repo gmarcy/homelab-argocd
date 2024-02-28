@@ -1,0 +1,72 @@
+---
+
+- name: Copy files from matchbox-config configmap
+  hosts: configmap
+  gather_facts: false
+  vars:
+    data_path: '/data'
+  tasks:
+    - file:
+        path: "{{ data_path + '/' + item }}"
+        state: absent
+      loop: "{{ directory_list }}"
+    - file:
+        path: "{{ data_path + '/' + item }}"
+        state: directory
+        recurse: true
+        mode: '0755'
+      loop: "{{ directory_list }}"
+    - copy:
+        src: "{{ item.src }}"
+        dest: "{{ data_path + '/' + item.dest }}"
+        mode: preserve
+      loop: "{{ file_list }}"
+
+- name: Generate matchbox resources
+  hosts: ungrouped
+  gather_facts: false
+  vars:
+    data_path: '/data'
+  tasks:
+    - copy:
+        content: |
+          {{ groups_template | to_nice_json(sort_keys=false,indent=2) }}
+        dest: "{{ data_path + '/groups/' + server_name + '-install.json' }}"
+        mode: '0644'
+    - copy:
+        content: |
+          {{ profiles_template | to_nice_json(sort_keys=false,indent=2) }}
+        dest: "{{ data_path + '/profiles/' + server_name + '-install.json.j2' }}"
+        mode: '0644'
+    - template:
+        src: "{{ data_path + '/profiles/' + server_name + '-install.json.j2' }}"
+        dest: "{{ data_path + '/profiles/' + server_name + '-install.json' }}"
+        mode: '0644'
+    - file:
+        path: "{{ data_path + '/profiles/' + server_name + '-install.json.j2' }}"
+        state: absent
+    - file:
+        path: "{{ data_path + '/assets/nbxyz/pxelinux.cfg/' + macaddr }}"
+        state: absent
+    - file:
+        src: "{{ data_path + '/assets/nbxyz/' + hostvars[profile].ipxe_template }}"
+        path: "{{ data_path + '/assets/nbxyz/pxelinux.cfg/' + macaddr }}"
+        state: hard
+
+- name: Download hosted assets
+  hosts: hosted-assets
+  gather_facts: false
+  vars:
+    data_path: '/data'
+  tasks:
+    - file:
+        path: "{{ data_path + '/assets' + item }}"
+        state: directory
+        recurse: true
+        mode: '0755'
+      loop: "{{ directory_list }}"
+    - get_url:
+        url: "{{ item.url }}"
+        dest: "{{ data_path + '/assets' + item.dest }}"
+        mode: "{{ item.mode }}"
+      loop: "{{ get_url_list }}"

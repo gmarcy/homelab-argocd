@@ -1,0 +1,50 @@
+variant: fcos
+version: 1.4.0
+passwd:
+  users:
+    - name: core
+      ssh_authorized_keys:
+        - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAsdgW20NtVSpXRSmC5cjEKTN+p9Ju01EdPYHdtwqmyp homelab@gmarcy.com
+storage:
+  disks:
+    - device: /dev/{{.boot_drive}}
+      wipe_table: false
+      partitions:
+        - start_mib: 20992
+          size_mib: 204800
+          label: var
+        - size_mib: 0
+          label: data
+  filesystems:
+    - path: /var
+      device: /dev/disk/by-partlabel/var
+      format: xfs
+      wipe_filesystem: true
+      with_mount_unit: true
+  files:
+    - path: /etc/systemd/system/rpm-ostree-install.service.d/rpms.conf
+      mode: 0644
+      contents:
+        inline: |
+          [Service]
+          Environment=RPMS="python3"
+systemd:
+  units:
+    - name: rpm-ostree-install.service
+      enabled: true
+      contents: |
+        [Unit]
+        Description=Layer additional rpms
+        Wants=network-online.target
+        After=network-online.target
+        # We run before `zincati.service` to avoid conflicting rpm-ostree transactions.
+        Before=zincati.service
+        ConditionPathExists=!/var/lib/%N.stamp
+        [Service]
+        Type=oneshot
+        RemainAfterExit=yes
+        ExecStart=/usr/bin/rpm-ostree refresh-md
+        ExecStart=/usr/bin/rpm-ostree install --idempotent --apply-live --allow-inactive $RPMS
+        ExecStart=/bin/touch /var/lib/%N.stamp
+        [Install]
+        WantedBy=multi-user.target

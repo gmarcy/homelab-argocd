@@ -35,3 +35,5 @@ helmCharts:
         config:
           use-forwarded-headers: "true"
           enable-ssl-passthrough: "true"
+      udp:
+        "53": "adguard/adguard-dns:3053"

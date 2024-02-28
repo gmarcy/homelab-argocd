@@ -1,4 +1,3 @@
----
 
 apiVersion: dnsmasq.kvaps.cf/v1beta1
 kind: DhcpOptions
@@ -17,7 +16,7 @@ spec:
     tags:
     - net111
     values:
-    - 192.168.111.253
+    - 192.168.111.1
   - key: option:domain-name
     tags:
     - net111
@@ -36,7 +35,7 @@ spec:
     tags:
     - net123
     values:
-    - 192.168.123.253
+    - 192.168.222.1
   - key: option:domain-name
     tags:
     - net123
@@ -52,16 +51,11 @@ spec:
     - net222
     values:
     - 192.168.222.1
-  - key: option:tftp-server
-    tags:
-    - net222
-    values:
-    - 192.168.222.210
   - key: option:dns-server
     tags:
     - net222
     values:
-    - 192.168.222.253
+    - 192.168.222.1
   - key: option:domain-name
     tags:
     - net222
@@ -80,7 +74,7 @@ spec:
     tags:
     - net234
     values:
-    - 192.168.234.253
+    - 192.168.222.1
   - key: option:domain-name
     tags:
     - net234

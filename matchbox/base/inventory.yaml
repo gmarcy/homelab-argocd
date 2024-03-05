@@ -6,7 +6,9 @@ all:
       hosts:
         matchbox-config:
           directory_list:
-          - assets/fedora-coreos/download
+          - assets/centos-9-stream
+          - assets/debian-12
+          - assets/fedora-coreos
           - assets/nbxyz
           - assets/nbxyz/pxelinux.cfg
           - generic
@@ -25,11 +27,14 @@ all:
             dest: assets/nbxyz/nbxyzmenu.ipxe
           - src: centos-9-stream-kickstart.conf
             dest: generic/centos-9-stream-kickstart.conf
+          - src: debian-12-preseed.txt
+            dest: generic/debian-12-preseed.txt
     assets:
       hosts:
         hosted-assets:
           directory_list:
             - '/centos-9-stream/images/pxeboot'
+            - '/fedora-coreos/download'
           get_url_list:
             - url: 'https://mirror.stream.centos.org/9-stream/BaseOS/x86_64/os/images/pxeboot/vmlinuz'
               dest: '/centos-9-stream/images/pxeboot/vmlinuz'
@@ -37,6 +42,12 @@ all:
             - url: 'https://mirror.stream.centos.org/9-stream/BaseOS/x86_64/os/images/pxeboot/initrd.img'
               dest: '/centos-9-stream/images/pxeboot/initrd.img'
               mode: '0644'
+            #- url: 'https://cdimage.debian.org/cdimage/daily-builds/daily/arch-latest/amd64/iso-cd/debian-testing-amd64-netinst.iso'
+            #  dest: '/debian-12/debian-testing-amd64-netinst.iso'
+            #  mode: '0644'
+          unarchive_list:
+            - src: 'https://d-i.debian.org/daily-images/amd64/daily/netboot/netboot.tar.gz'
+              dest: '/debian-12/'
     profiles:
       hosts:
         assisted-installer:
@@ -49,9 +60,9 @@ all:
           ipxe_template: matchbox.ipxe
           generic_id: centos-9-stream-kickstart.conf
           boot:
-            kernel: http://mirror.stream.centos.org/9-stream/BaseOS/x86_64/os/images/pxeboot/vmlinuz
+            kernel: /assets/centos-9-stream/images/pxeboot/vmlinuz
             initrd:
-              - http://mirror.stream.centos.org/9-stream/BaseOS/x86_64/os/images/pxeboot/initrd.img
+              - /assets/centos-9-stream/images/pxeboot/initrd.img
             args:
               - initrd=initrd.img
               - inst.sshd=1
@@ -60,6 +71,21 @@ all:
           assets:
           - name:
             content:
+        debian-12:
+          id: debian-12-install
+          name: debian-12-install
+          ipxe_template: matchbox.ipxe
+          generic_id: debian-12-preseed.txt
+          boot:
+            kernel: /assets/debian-12/debian-installer/amd64/linux
+            initrd:
+              - /assets/debian-12/debian-installer/amd64/initrd.gz
+            args:
+              - auto=true
+              - priority=critical
+              - url=http://matchbox.192.168.222.254.nip.io/generic?uuid=${uuid}&mac=${mac:hexhyp}
+              - interface=eno1
+              - initrd=initrd.magic
         fedora-coreos:
           id: fedora-coreos-install
           name: fedora-coreos-install
@@ -188,4 +214,4 @@ all:
     um690:
       macaddr: 58-47-ca-70-5b-39
       bootdev: nvme0n1
-      profile: fedora-coreos
+      profile: centos-9-stream

@@ -17,6 +17,7 @@ configMapGenerator:
       - assets/nbxyz/menu.ipxe
       - assets/nbxyz/nbxyzmenu.ipxe
       - generic/centos-9-stream-kickstart.conf
+      - generic/debian-12-preseed.txt
       - generic/fedora-coreos-butane.yaml
       - inventory.yaml
       - playbook.yaml

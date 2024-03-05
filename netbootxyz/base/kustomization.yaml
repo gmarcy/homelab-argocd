@@ -1,5 +1,9 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+namespace: netbootxyz
+
+resources:
+  - namespace.yaml
 
 configMapGenerator:
   - name: netbootxyz-setup
@@ -20,13 +24,16 @@ helmCharts:
     valuesInline:
       controllers:
         main:
-          type: statefulset
+          replicas: 1
+          type: deployment
           initContainers:
             builder:
+              order: 1
               image:
                 repository: ghcr.io/gmarcy/netboot.xyz-builder
                 tag: latest
             setup:
+              order: 2
               image:
                 repository: busybox
                 tag: 1.36
@@ -41,23 +48,32 @@ helmCharts:
                 tag: 0.7.0-nbxyz2
               env:
                 TZ: UTC
+              ports:
+                - containerPort: 3000
+                  name: http
+                  protocol: TCP
+                - containerPort: 69
+                  name: tftp
+                  protocol: UDP
               securityContext:
                 privileged: true
-          statefulset:
-            volumeClaimTemplates:
-              - name: config
-                accessMode: ReadWriteOnce
-                size: 2Gi
-                globalMounts:
-                  - path: /config
-              - name: assets
-                accessMode: ReadWriteOnce
-                size: 2Gi
-                globalMounts:
-                  - path: /assets
       defaultPodOptions:
         hostNetwork: true
       persistence:
+        assets:
+          enabled: true
+          type: persistentVolumeClaim
+          accessMode: ReadWriteOnce
+          size: 2Gi
+          globalMounts:
+            - path: /assets
+        config:
+          enabled: true
+          type: persistentVolumeClaim
+          accessMode: ReadWriteOnce
+          size: 2Gi
+          globalMounts:
+            - path: /config
         setup:
           enabled: true
           type: configMap
@@ -109,5 +125,5 @@ patches:
     target:
       group: apps
       version: v1
-      kind: StatefulSet
+      kind: Deployment
       name: netbootxyz

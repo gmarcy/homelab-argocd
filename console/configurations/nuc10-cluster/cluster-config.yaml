@@ -5,7 +5,7 @@ cluster:
   name: nuc10-cluster
 destination:
   namespace: openshift-console
-  server: https://192.168.222.214.nip.io:6443
+  server: https://kubernetes.default.svc
 project:
   name: default
 source:

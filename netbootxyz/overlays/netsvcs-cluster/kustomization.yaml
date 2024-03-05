@@ -9,10 +9,10 @@ patches:
   - patch: |-
       - op: replace
         path: /spec/rules/0/host
-        value: netbootxyz.192.168.222.xxx.nip.io
+        value: netbootxyz.192.168.222.253.nip.io
       - op: replace
         path: /spec/tls/0/hosts/0
-        value: netbootxyz.192.168.222.xxx.nip.io
+        value: netbootxyz.192.168.222.253.nip.io
     target:
       group: networking.k8s.io
       version: v1

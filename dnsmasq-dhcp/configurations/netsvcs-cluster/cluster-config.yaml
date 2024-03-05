@@ -5,7 +5,7 @@ cluster:
   name: netsvcs-cluster
 destination:
   namespace: dnsmasq-dhcp
-  server: https://192.168.222.253.nip.io:6443
+  server: https://kubernetes.default.svc
 project:
   name: default
 source:

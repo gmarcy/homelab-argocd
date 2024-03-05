@@ -54,7 +54,7 @@
         state: hard
 
 - name: Download hosted assets
-  hosts: hosted-assets
+  hosts: assets
   gather_facts: false
   vars:
     data_path: '/data'
@@ -70,3 +70,9 @@
         dest: "{{ data_path + '/assets' + item.dest }}"
         mode: "{{ item.mode }}"
       loop: "{{ get_url_list }}"
+    - unarchive:
+        src: "{{ item.src }}"
+        dest: "{{ data_path + '/assets' + item.dest }}"
+        remote_src: true
+        validate_certs: false
+      loop: "{{ unarchive_list }}"

@@ -5,18 +5,24 @@ metadata:
   name: dnsmasq-controller
   namespace: dnsmasq-dhcp
   labels:
-    app: dnsmasq-controller
+    app.kubernetes.io/component: main
+    app.kubernetes.io/instance: dnsmasq-controller
+    app.kubernetes.io/name: dnsmasq-controller
 spec:
   selector:
     matchLabels:
-      app: dnsmasq-controller
+      app.kubernetes.io/component: main
+      app.kubernetes.io/instance: dnsmasq-controller
+      app.kubernetes.io/name: dnsmasq-controller
   template:
     metadata:
       labels:
-        app: dnsmasq-controller
+        app.kubernetes.io/component: main
+        app.kubernetes.io/instance: dnsmasq-controller
+        app.kubernetes.io/name: dnsmasq-controller
     spec:
       containers:
-      - name: dnsmasq-dhcp
+      - name: main
         image: ghcr.io/gmarcy/dnsmasq-controller:2024-02-23-17-06-12
         securityContext:
           capabilities:

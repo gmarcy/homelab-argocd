@@ -32,26 +32,3 @@ patches:
       group: dnsmasq.kvaps.cf
       version: v1beta1
       kind: DhcpOptions
-  - patch: |-
-      - op: add
-        path: /spec/options/-
-        value:
-          key: dhcp-boot
-          values:
-          - tag:ipxe
-          - ipxe/netboot.xyz.kpxe
-          - 192.168.222.214
-          - 192.168.222.214
-      - op: add
-        path: /spec/options/-
-        value:
-          key: dhcp-boot
-          values:
-          - tag:net222
-          - ipxe/netboot.xyz.kpxe
-          - 192.168.222.214
-          - 192.168.222.214
-    target:
-      group: dnsmasq.kvaps.cf
-      version: v1beta1
-      kind: DnsmasqOptions

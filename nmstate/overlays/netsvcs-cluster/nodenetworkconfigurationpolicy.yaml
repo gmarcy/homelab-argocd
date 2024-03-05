@@ -53,13 +53,18 @@ spec:
           prefix-length: 24
         enabled: true
         dhcp: false
+    - name: enp6s0
+      type: ethernet
+      state: up
+      ipv4:
+        address:
+        - ip: 192.168.1.65
+          prefix-length: 24
+        enabled: true
+        dhcp: false
     routes:
       config:
         - destination: 0.0.0.0/0
           metric: 100
-          next-hop-address: 192.168.222.1
-          next-hop-interface: enp2s0
-        - destination: 0.0.0.0/0
-          metric: 101
-          next-hop-address: 192.168.111.1
-          next-hop-interface: enp3s0
+          next-hop-address: 192.168.1.254
+          next-hop-interface: enp6s0

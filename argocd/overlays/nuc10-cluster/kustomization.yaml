@@ -8,10 +8,10 @@ patches:
   - patch: |-
       - op: replace
         path: /spec/rules/0/host
-        value: "argocd.192.168.222.212.nip.io"
+        value: argocd.192.168.222.214.nip.io
       - op: add
         path: /spec/tls/0/hosts/-
-        value: "argocd.192.168.222.212.nip.io"
+        value: "argocd.192.168.222.214.nip.io"
     target:
       group: networking.k8s.io
       version: v1
@@ -19,7 +19,7 @@ patches:
   - patch: |-
       - op: replace
         path: /spec/generators/0/git/files/0/path
-        value: "*/configurations/argocd-cluster/cluster-config.yaml"
+        value: "*/configurations/nuc10-cluster/cluster-config.yaml"
     target:
       group: argoproj.io
       version: v1alpha1

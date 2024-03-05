@@ -1,14 +1,14 @@
 app:
-  label: adguard
-  name: adguard
+  label: netbootxyz
+  name: netbootxyz
 cluster:
-  name: nuc10-cluster
+  name: netsvcs-cluster
 destination:
-  namespace: adguard
+  namespace: netbootxyz
   server: https://kubernetes.default.svc
 project:
   name: default
 source:
-  path: adguard/overlays/nuc10-cluster
+  path: netbootxyz/overlays/netsvcs-cluster
   repoURL: https://github.com/gmarcy/homelab-argocd.git
   targetRevision: HEAD

@@ -58,16 +58,25 @@ then
 
 else
 
+  efibootmgr --delete-bootnum --bootnum 00FF
+
   efibootmgr | grep -q 'BootNext'
   if [ $? = 0 ]; then
     efibootmgr -N
   fi
 
+  efibootmgr | grep -q '^Boot000[0-9A-F]\** *UEFI : Samsung SSD.*'
+  if [ $? = 0 ]; then
+    BOOT_FIRST=$(efibootmgr | sed -n -e 's/^Boot\(000[0-9A-F]\)\** *UEFI : Samsung SSD.*/\1,/p')
+  fi
+
+  efibootmgr | grep -q '^Boot000[0-9A-F]\* Fedora.*'
+  if [ $? = 0 ]; then
+    BOOT_FIRST=$(efibootmgr | sed -n -e 's/^Boot\(000[0-9A-F]\)\* Fedora.*/\1,/p')
+  fi
+
   set -ex
 
-  efibootmgr --delete-bootnum --bootnum 00FF
-
-  BOOT_FIRST=$(efibootmgr | sed -n -e 's/^Boot\(000[0-9A-F]\)\* Fedora.*/\1,/p')
   if [ "${BOOT_FIRST}" ]; then
     BOOT_CURRENT=$(efibootmgr | sed -n -e 's/^BootCurrent: \(.*\)/\1,/p')
     BOOT_ORDER=$(efibootmgr | sed -n -e 's/^BootOrder: \(.*\)/\1/p')

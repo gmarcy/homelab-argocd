@@ -1,0 +1,102 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: tftpd-hpa
+
+resources:
+  - namespace.yaml
+
+configMapGenerator:
+  - name: tftpd-hpa-setup
+    literals:
+      - |
+        setup-tftpboot.sh=rm -rf /var/lib/tftpboot/*
+        cp -r /buildout/buildout/* /var/lib/tftpboot/
+
+helmCharts:
+  - name: app-template
+    repo: https://bjw-s.github.io/helm-charts/
+    releaseName: tftpd-hpa
+    namespace: tftpd-hpa
+    version: 2.4.0
+    valuesInline:
+      controllers:
+        main:
+          replicas: 1
+          type: deployment
+          initContainers:
+            builder:
+              order: 1
+              image:
+                repository: ghcr.io/gmarcy/netboot.xyz-builder
+                tag: latest
+            setup:
+              order: 2
+              image:
+                repository: busybox
+                tag: 1.36
+              command:
+                - /bin/sh
+                - -x
+                - /setup/setup-tftpboot.sh
+          containers:
+            main:
+              image:
+                repository: ghcr.io/gmarcy/docker-tftpd-hpa
+                tag: latest
+              env:
+                PORT_RANGE: "30000:30010"
+              ports:
+                - containerPort: 69
+                  name: tftp
+                  protocol: UDP
+      defaultPodOptions:
+        hostNetwork: true
+      persistence:
+        buildout:
+          enabled: true
+          type: emptyDir
+          globalMounts:
+            - path: /buildout
+        setup:
+          enabled: true
+          type: configMap
+          name: tftpd-hpa-setup
+          mountPath: "-"
+        tftpboot:
+          enabled: true
+          type: persistentVolumeClaim
+          accessMode: ReadWriteOnce
+          size: 2Gi
+          globalMounts:
+            - path: /var/lib/tftpboot
+      service:
+        main:
+          enabled: true
+          primary: true
+          controller: main
+          type: NodePort
+          ports:
+            http:
+              enabled: false
+            tftp:
+              enabled: true
+              primary: false
+              port: 69
+              targetPort: 69
+              protocol: UDP
+
+patches:
+  - patch: |-
+      - op: remove
+        path: /spec/template/spec/containers/0/volumeMounts/0
+      - op: remove
+        path: /spec/template/spec/containers/0/volumeMounts/0
+      - op: remove
+        path: /spec/template/spec/initContainers/0/volumeMounts/1
+      - op: remove
+        path: /spec/template/spec/initContainers/0/volumeMounts/1
+    target:
+      group: apps
+      version: v1
+      kind: Deployment
+      name: tftpd-hpa

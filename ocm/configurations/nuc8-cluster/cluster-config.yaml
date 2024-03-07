@@ -1,14 +1,14 @@
 app:
-  label: openshift-console
-  name: console
+  label: ocm
+  name: ocm
 cluster:
-  name: argocd-cluster
+  name: nuc8-cluster
 destination:
-  namespace: openshift-console
+  namespace: open-cluster-management
   server: https://kubernetes.default.svc
 project:
   name: default
 source:
-  path: console/overlays/argocd-cluster
+  path: ocm/overlays/nuc8-cluster
   repoURL: https://github.com/gmarcy/homelab-argocd.git
   targetRevision: HEAD

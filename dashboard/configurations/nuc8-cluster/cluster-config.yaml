@@ -1,14 +1,14 @@
 app:
-  label: cert-manager
-  name: cert-manager
+  label: kubernetes-dashboard
+  name: dashboard
 cluster:
-  name: argocd-cluster
+  name: nuc8-cluster
 destination:
-  namespace: cert-manager
+  namespace: kubernetes-dashboard
   server: https://kubernetes.default.svc
 project:
   name: default
 source:
-  path: cert-manager/overlays/argocd-cluster
+  path: dashboard/overlays/nuc8-cluster
   repoURL: https://github.com/gmarcy/homelab-argocd.git
   targetRevision: HEAD

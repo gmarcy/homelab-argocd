@@ -19,7 +19,7 @@ patches:
   - patch: |-
       - op: replace
         path: /spec/generators/0/git/files/0/path
-        value: "*/configurations/argocd-cluster/cluster-config.yaml"
+        value: "*/configurations/nuc8-cluster/cluster-config.yaml"
     target:
       group: argoproj.io
       version: v1alpha1

@@ -8,7 +8,7 @@ patches:
   - patch: |-
       - op: replace
         path: /spec/rules/0/host
-        value: argocd.192.168.222.253.nip.io
+        value: "argocd.192.168.222.253.nip.io"
       - op: add
         path: /spec/tls/0/hosts/-
         value: "argocd.192.168.222.253.nip.io"

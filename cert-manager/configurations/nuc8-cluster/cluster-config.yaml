@@ -1,14 +1,14 @@
 app:
-  label: grafana-agent
-  name: grafana-agent
+  label: cert-manager
+  name: cert-manager
 cluster:
-  name: argocd-cluster
+  name: nuc8-cluster
 destination:
-  namespace: grafana-agent
+  namespace: cert-manager
   server: https://kubernetes.default.svc
 project:
   name: default
 source:
-  path: grafana-agent/overlays/argocd-cluster
+  path: cert-manager/overlays/nuc8-cluster
   repoURL: https://github.com/gmarcy/homelab-argocd.git
   targetRevision: HEAD

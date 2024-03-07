@@ -1,14 +1,14 @@
 app:
-  label: kubernetes-dashboard
-  name: dashboard
+  label: ingress-nginx
+  name: ingress-nginx
 cluster:
-  name: argocd-cluster
+  name: nuc8-cluster
 destination:
-  namespace: kubernetes-dashboard
+  namespace: ingress-nginx
   server: https://kubernetes.default.svc
 project:
   name: default
 source:
-  path: dashboard/overlays/argocd-cluster
+  path: ingress-nginx/overlays/nuc8-cluster
   repoURL: https://github.com/gmarcy/homelab-argocd.git
   targetRevision: HEAD

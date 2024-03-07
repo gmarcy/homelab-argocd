@@ -1,14 +1,14 @@
 app:
-  label: argocd
-  name: argocd
+  label: topolvm
+  name: topolvm
 cluster:
-  name: argocd-cluster
+  name: nuc8-cluster
 destination:
-  namespace: argocd
+  namespace: topolvm-system
   server: https://kubernetes.default.svc
 project:
   name: default
 source:
-  path: argocd/overlays/argocd-cluster
+  path: topolvm/overlays/nuc8-cluster
   repoURL: https://github.com/gmarcy/homelab-argocd.git
   targetRevision: HEAD

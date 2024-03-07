@@ -32,6 +32,10 @@ spec:
     - 192.168.234.120
     - 192.168.234.199
     - 24h
+  - key: dhcp-boot
+    values:
+    - tag:net222
+    - ipxe/netboot.xyz.efi
   - key: dhcp-match
     values:
     - set:ipxe

@@ -11,6 +11,9 @@ patches:
         value: "--interface=eno1"
       - op: add
         path: /spec/template/spec/containers/0/args/-
+        value: "--interface=enp57s0u1"
+      - op: add
+        path: /spec/template/spec/containers/0/args/-
         value: "--interface=enp0s20f0u1"
       - op: add
         path: /spec/template/spec/containers/0/args/-
@@ -20,6 +23,38 @@ patches:
       version: v1
       kind: Deployment
   - patch: |-
+      - op: add
+        path: /spec/options/-
+        value:
+          key: option:dns-server
+          tags:
+          - net111
+          values:
+          - 192.168.111.214
+      - op: add
+        path: /spec/options/-
+        value:
+          key: option:dns-server
+          tags:
+          - net123
+          values:
+          - 192.168.123.214
+      - op: add
+        path: /spec/options/-
+        value:
+          key: option:dns-server
+          tags:
+          - net222
+          values:
+          - 192.168.222.214
+      - op: add
+        path: /spec/options/-
+        value:
+          key: option:dns-server
+          tags:
+          - net234
+          values:
+          - 192.168.234.214
       - op: add
         path: /spec/options/-
         value:

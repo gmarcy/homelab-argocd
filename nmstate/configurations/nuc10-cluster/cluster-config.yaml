@@ -1,0 +1,14 @@
+app:
+  label: nmstate
+  name: nmstate
+cluster:
+  name: nuc10-cluster
+destination:
+  namespace: nmstate
+  server: https://kubernetes.default.svc
+project:
+  name: default
+source:
+  path: nmstate/overlays/nuc10-cluster
+  repoURL: https://github.com/gmarcy/homelab-argocd.git
+  targetRevision: HEAD

@@ -1,0 +1,65 @@
+apiVersion: nmstate.io/v1
+kind: NodeNetworkConfigurationPolicy
+metadata:
+  name: ethernet
+  namespace: nmstate
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+spec:
+  desiredState:
+    dns-resolver:
+      config:
+        server:
+        - 192.168.222.214
+        - 8.8.8.8
+        search:
+        - lab.gmarcy.com
+    hostname:
+      config: nuc10
+    interfaces:
+    - name: eno1
+      state: up
+      type: ethernet
+      ipv4:
+        address:
+        - ip: 192.168.222.214
+          prefix-length: 24
+        enabled: true
+        dhcp: false
+    - name: enp57s0u1
+      type: ethernet
+      state: up
+      ipv4:
+        address:
+        - ip: 192.168.111.214
+          prefix-length: 21
+        enabled: true
+        dhcp: false
+    - name: enp0s20f0u1
+      type: ethernet
+      state: up
+      ipv4:
+        address:
+        - ip: 192.168.123.214
+          prefix-length: 24
+        enabled: true
+        dhcp: false
+    - name: enp0s20f0u2
+      type: ethernet
+      state: up
+      ipv4:
+        address:
+        - ip: 192.168.234.214
+          prefix-length: 24
+        enabled: true
+        dhcp: false
+    routes:
+      config:
+        - destination: 0.0.0.0/0
+          metric: 102
+          next-hop-address: 192.168.222.1
+          next-hop-interface: eno1
+        - destination: 0.0.0.0/0
+          metric: 105
+          next-hop-address: 192.168.111.1
+          next-hop-interface: enp57s0u1

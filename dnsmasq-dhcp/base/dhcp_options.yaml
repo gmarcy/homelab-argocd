@@ -12,11 +12,6 @@ spec:
     - net111
     values:
     - 192.168.111.1
-  - key: option:dns-server
-    tags:
-    - net111
-    values:
-    - 192.168.111.253
   - key: option:domain-name
     tags:
     - net111
@@ -31,11 +26,6 @@ spec:
     tags:
     - net123
     values: []
-  - key: option:dns-server
-    tags:
-    - net123
-    values:
-    - 192.168.123.253
   - key: option:domain-name
     tags:
     - net123
@@ -51,11 +41,6 @@ spec:
     - net222
     values:
     - 192.168.222.1
-  - key: option:dns-server
-    tags:
-    - net222
-    values:
-    - 192.168.222.253
   - key: option:domain-name
     tags:
     - net222
@@ -70,11 +55,6 @@ spec:
     tags:
     - net234
     values: []
-  - key: option:dns-server
-    tags:
-    - net234
-    values:
-    - 192.168.234.253
   - key: option:domain-name
     tags:
     - net234

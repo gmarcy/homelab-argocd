@@ -11,8 +11,8 @@ spec:
   - key: dhcp-range
     values:
     - set:net111
-    - 192.168.111.120
-    - 192.168.111.199
+    - 192.168.110.120
+    - 192.168.110.199
     - 24h
   - key: dhcp-range
     values:

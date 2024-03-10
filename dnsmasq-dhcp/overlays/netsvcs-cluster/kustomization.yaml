@@ -26,6 +26,38 @@ patches:
       - op: add
         path: /spec/options/-
         value:
+          key: option:dns-server
+          tags:
+          - net111
+          values:
+          - 192.168.111.253
+      - op: add
+        path: /spec/options/-
+        value:
+          key: option:dns-server
+          tags:
+          - net123
+          values:
+          - 192.168.123.253
+      - op: add
+        path: /spec/options/-
+        value:
+          key: option:dns-server
+          tags:
+          - net222
+          values:
+          - 192.168.222.253
+      - op: add
+        path: /spec/options/-
+        value:
+          key: option:dns-server
+          tags:
+          - net234
+          values:
+          - 192.168.234.253
+      - op: add
+        path: /spec/options/-
+        value:
           key: option:tftp-server
           tags:
           - net222

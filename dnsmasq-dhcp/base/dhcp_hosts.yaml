@@ -8,6 +8,202 @@ metadata:
 spec:
   controller: ""
   hosts:
+  - ip: 192.168.104.2
+    macs:
+    - fc:f5:28:5a:e7:c7
+    setTags:
+    - net111
+    hostname: GS1910-24.home.glenn4u.com
+    leaseTime: 24h
+  - ip: 192.168.104.3
+    macs:
+    - c8:9e:43:a0:ca:62
+    setTags:
+    - net111
+    hostname: SXR80.home.glenn4u.com
+    leaseTime: 24h
+  - ip: 192.168.104.4
+    macs:
+    - c8:9e:43:94:d5:81
+    setTags:
+    - net111
+    hostname: SXS80.home.glenn4u.com
+    leaseTime: 24h
+  - ip: 192.168.104.5
+    macs:
+    - 24:5e:be:5b:cd:46
+    setTags:
+    - net111
+    hostname: QSW-M2108R-2C.home.glenn4u.com
+    leaseTime: 24h
+  - ip: 192.168.104.6
+    macs:
+    - bc:a5:11:13:f2:34
+    setTags:
+    - net111
+    hostname: GS108E.home.glenn4u.com
+    leaseTime: 24h
+  - ip: 192.168.104.7
+    macs:
+    - 34:98:b5:a7:ea:54
+    setTags:
+    - net111
+    hostname: GS110EMX.home.glenn4u.com
+    leaseTime: 24h
+  - ip: 192.168.104.8
+    macs:
+    - d8:ec:e5:97:27:96
+    setTags:
+    - net111
+    hostname: XGS1250-12-bonus.home.glenn4u.com
+    leaseTime: 24h
+  - ip: 192.168.104.9
+    macs:
+    - d8:ec:e5:cb:cf:fe
+    setTags:
+    - net111
+    hostname: XGS1250-12-closet.home.glenn4u.com
+    leaseTime: 24h
+  - ip: 192.168.104.10
+    macs:
+    - 9c:c9:eb:0f:56:41
+    setTags:
+    - net111
+    hostname: GS305E.home.glenn4u.com
+    leaseTime: 24h
+  - ip: 192.168.104.11
+    macs:
+    - 78:2d:7e:21:09:48
+    setTags:
+    - net111
+    hostname: TEG-3102WS.home.glenn4u.com
+    leaseTime: 24h
+  - ip: 192.168.104.12
+    macs:
+    - 00:23:79:00:23:35
+    setTags:
+    - net111
+    hostname: 2G08110GT.home.glenn4u.com
+    leaseTime: 24h
+  - ip: 192.168.104.24
+    macs:
+    - 3c:8c:f8:c0:d4:eb
+    setTags:
+    - net111
+    hostname: TEG-30284.home.glenn4u.com
+    leaseTime: 24h
+  - ip: 192.168.104.26
+    macs:
+    - bc:cf:4f:55:e4:09
+    setTags:
+    - net111
+    hostname: gs1900-24.home.glenn4u.com
+    leaseTime: 24h
+  - ip: 192.168.104.234
+    macs:
+    - 74:83:c2:fa:3c:44
+    setTags:
+    - net111
+    hostname: es-16-xg.home.glenn4u.com
+    leaseTime: 24h
+  - ip: 192.168.109.64
+    macs:
+    - a8:23:fe:13:58:d1
+    setTags:
+    - net111
+    hostname: lg-unknown-wifi-xx.home.glenn4u.com
+    leaseTime: 24h
+  - ip: 192.168.109.65
+    macs:
+    - 68:3a:48:4b:fe:30
+    setTags:
+    - net111
+    hostname: unknown-wifi-xx.home.glenn4u.com
+    leaseTime: 24h
+  - ip: 192.168.109.66
+    macs:
+    - 68:3a:48:4b:fe:31
+    setTags:
+    - net111
+    hostname: unknown-wifi-xx.home.glenn4u.com
+    leaseTime: 24h
+  - ip: 192.168.109.67
+    macs:
+    - 76:db:f3:63:92:0e
+    setTags:
+    - net111
+    hostname: unknown-wifi-xx.home.glenn4u.com
+    leaseTime: 24h
+  - ip: 192.168.109.68
+    macs:
+    - d4:a6:51:ab:98:2b
+    setTags:
+    - net111
+    hostname: tuya-unknown-wifi-xx.home.glenn4u.com
+    leaseTime: 24h
+  - ip: 192.168.109.69
+    macs:
+    - dc:36:0c:d5:ff:fb
+    setTags:
+    - net111
+    hostname: hitron-unknown-wifi-xx.home.glenn4u.com
+    leaseTime: 24h
+  - ip: 192.168.109.70
+    macs:
+    - de:c6:c9:e0:4f:66
+    setTags:
+    - net111
+    hostname: unknown-wifi-xx.home.glenn4u.com
+    leaseTime: 24h
+  - ip: 192.168.109.71
+    macs:
+    - d4:a6:51:ab:a1:2f
+    setTags:
+    - net111
+    hostname: tuya-unknown-wifi-xx.home.glenn4u.com
+    leaseTime: 24h
+  - ip: 192.168.109.72
+    macs:
+    - d4:a6:51:ab:98:0c
+    setTags:
+    - net111
+    hostname: tuya-unknown-wifi-xx.home.glenn4u.com
+    leaseTime: 24h
+  - ip: 192.168.109.73
+    macs:
+    - a6:94:fd:3d:3f:57
+    setTags:
+    - net111
+    hostname: unknown-wifi-xx.home.glenn4u.com
+    leaseTime: 24h
+  - ip: 192.168.109.74
+    macs:
+    - 70:f7:54:e2:b6:89
+    setTags:
+    - net111
+    hostname: khadas-unknown-wifi-xx.home.glenn4u.com
+    leaseTime: 24h
+  - ip: 192.168.109.75
+    macs:
+    - dc:36:0c:d5:fd:80
+    setTags:
+    - net111
+    hostname: hitron-unknown-wifi-xx.home.glenn4u.com
+    leaseTime: 24h
+  - ip: 192.168.109.76
+    macs:
+    - 0c:8b:fd:9b:af:aa
+    setTags:
+    - net111
+    hostname: nuc-old.home.glenn4u.com
+    leaseTime: 24h
+  - ip: 192.168.109.77
+    macs:
+    - e8:6a:64:f1:32:0d
+    setTags:
+    - net111
+    hostname: GLENN-X1C6-1gbe.home.glenn4u.com
+    leaseTime: 24h
   - ip: 192.168.110.10
     macs:
     - d4:a6:51:1d:12:b5
@@ -34,21 +230,14 @@ spec:
     - 2c:59:e5:f2:5a:23
     setTags:
     - net111
-    hostname: office-jet-8600.home.glenn4u.com
+    hostname: office-jet-8600-wifi.home.glenn4u.com
     leaseTime: 24h
   - ip: 192.168.110.14
     macs:
     - d4:a6:51:22:3d:35
     setTags:
     - net111
-    hostname: fiber-plug.home.glenn4u.com
-    leaseTime: 24h
-  - ip: 192.168.110.15
-    macs:
-    - 68:57:2d:ec:a0:64
-    setTags:
-    - net111
-    hostname: gateway-plug.home.glenn4u.com
+    hostname: christmas-tree-smart-plug.home.glenn4u.com
     leaseTime: 24h
   - ip: 192.168.110.20
     macs:
@@ -56,6 +245,13 @@ spec:
     setTags:
     - net111
     hostname: office-dot.home.glenn4u.com
+    leaseTime: 24h
+  - ip: 192.168.110.21
+    macs:
+    - 84:28:59:c9:11:0d
+    setTags:
+    - net111
+    hostname: office-show.home.glenn4u.com
     leaseTime: 24h
   - ip: 192.168.110.22
     macs:
@@ -91,6 +287,27 @@ spec:
     setTags:
     - net111
     hostname: kitchen-dot.home.glenn4u.com
+    leaseTime: 24h
+  - ip: 192.168.110.27
+    macs:
+    - 1c:fe:2b:3f:56:5c
+    setTags:
+    - net111
+    hostname: living-room-left-dot.home.glenn4u.com
+    leaseTime: 24h
+  - ip: 192.168.110.28
+    macs:
+    - 1c:fe:2b:63:b4:a7
+    setTags:
+    - net111
+    hostname: living-room-right-dot.home.glenn4u.com
+    leaseTime: 24h
+  - ip: 192.168.110.30
+    macs:
+    - 50:14:79:0e:8e:a3
+    setTags:
+    - net111
+    hostname: roomba.home.glenn4u.com
     leaseTime: 24h
   - ip: 192.168.110.31
     macs:
@@ -281,6 +498,13 @@ spec:
     - net111
     hostname: Mary-Beths-iPad.home.glenn4u.com
     leaseTime: 24h
+  - ip: 192.168.110.94
+    macs:
+    - 52:3e:6e:27:62:6b
+    setTags:
+    - net111
+    hostname: glenn-ipad-mini6.home.glenn4u.com
+    leaseTime: 24h
   - ip: 192.168.110.95
     macs:
     - f2:0f:4a:1c:d4:17
@@ -351,13 +575,6 @@ spec:
     - net111
     hostname: net-123-plug.home.glenn4u.com
     leaseTime: 24h
-  - ip: 192.168.110.145
-    macs:
-    - 70:f7:54:e2:b6:89
-    setTags:
-    - net111
-    hostname: khadas-edge2.home.glenn4u.com
-    leaseTime: 24h
   - ip: 192.168.110.200
     macs:
     - 18:69:d8:fe:41:ea
@@ -414,6 +631,20 @@ spec:
     - net111
     hostname: server7-plug.home.glenn4u.com
     leaseTime: 24h
+  - ip: 192.168.110.212
+    macs:
+    - d4:a6:51:25:9d:ae
+    setTags:
+    - net111
+    hostname: nuc8-smart-plug.home.glenn4u.com
+    leaseTime: 24h
+  - ip: 192.168.110.214
+    macs:
+    - 68:57:2d:ec:a0:64
+    setTags:
+    - net111
+    hostname: nuc10-smart-plug.home.glenn4u.com
+    leaseTime: 24h
   - ip: 192.168.110.216
     macs:
     - 7a:97:85:0c:63:4e
@@ -428,6 +659,69 @@ spec:
     - net111
     hostname: p340-wifi.home.glenn4u.com
     leaseTime: 24h
+  - ip: 192.168.110.240
+    macs:
+    - c4:4f:33:f3:b6:76
+    setTags:
+    - net111
+    hostname: may0-smart-plug.home.glenn4u.com
+    leaseTime: 24h
+  - ip: 192.168.110.241
+    macs:
+    - c4:4f:33:f3:e8:a5
+    setTags:
+    - net111
+    hostname: may1-smart-plug.home.glenn4u.com
+    leaseTime: 24h
+  - ip: 192.168.110.242
+    macs:
+    - 70:03:9f:12:a2:d6
+    setTags:
+    - net111
+    hostname: may2-smart-plug.home.glenn4u.com
+    leaseTime: 24h
+  - ip: 192.168.110.243
+    macs:
+    - 70:03:9f:14:6b:e1
+    setTags:
+    - net111
+    hostname: may3-smart-plug.home.glenn4u.com
+    leaseTime: 24h
+  - ip: 192.168.110.244
+    macs:
+    - c4:4f:33:f3:bf:1d
+    setTags:
+    - net111
+    hostname: cluster-switch-smart-plug.home.glenn4u.com
+    leaseTime: 24h
+  - ip: 192.168.109.245
+    macs:
+    - 68:57:2d:fe:04:1a
+    setTags:
+    - net111
+    hostname: um690-smart-plug.home.glenn4u.com
+    leaseTime: 24h
+  - ip: 192.168.110.246
+    macs:
+    - 70:03:9f:14:5f:95
+    setTags:
+    - net111
+    hostname: th80a-smart-plug.home.glenn4u.com
+    leaseTime: 24h
+  - ip: 192.168.110.247
+    macs:
+    - c4:4f:33:f3:c4:fe
+    setTags:
+    - net111
+    hostname: th80b-smart-plug.home.glenn4u.com
+    leaseTime: 24h
+  - ip: 192.168.110.248
+    macs:
+    - c4:4f:33:f3:b8:66
+    setTags:
+    - net111
+    hostname: th80c-smart-plug.home.glenn4u.com
+    leaseTime: 24h
   - ip: 192.168.111.1
     macs:
     - 18:e8:29:4d:7a:7d
@@ -435,61 +729,19 @@ spec:
     - net111
     hostname: router.home.glenn4u.com
     leaseTime: 24h
-  - ip: 192.168.111.2
+  - ip: 192.168.111.12
     macs:
-    - fc:f5:28:5a:e7:c7
+    - 40:b0:34:7d:1c:16
     setTags:
     - net111
-    hostname: GS1910-24.home.glenn4u.com
+    hostname: office-jet-8710-wired.home.glenn4u.com
     leaseTime: 24h
-  - ip: 192.168.111.3
+  - ip: 192.168.111.13
     macs:
-    - c8:9e:43:a0:ca:62
+    - 2c:59:e5:e9:4d:fd
     setTags:
     - net111
-    hostname: SXR80.home.glenn4u.com
-    leaseTime: 24h
-  - ip: 192.168.111.4
-    macs:
-    - c8:9e:43:94:d5:81
-    setTags:
-    - net111
-    hostname: SXS80.home.glenn4u.com
-    leaseTime: 24h
-  - ip: 192.168.111.5
-    macs:
-    - 9c:c9:eb:0f:56:41
-    setTags:
-    - net111
-    hostname: GS305E.home.glenn4u.com
-    leaseTime: 24h
-  - ip: 192.168.111.6
-    macs:
-    - bc:a5:11:13:f2:34
-    setTags:
-    - net111
-    hostname: GS108E.home.glenn4u.com
-    leaseTime: 24h
-  - ip: 192.168.111.7
-    macs:
-    - 34:98:b5:a7:ea:54
-    setTags:
-    - net111
-    hostname: GS110EMX.home.glenn4u.com
-    leaseTime: 24h
-  - ip: 192.168.111.8
-    macs:
-    - d8:ec:e5:97:27:96
-    setTags:
-    - net111
-    hostname: XGS1250-12.home.glenn4u.com
-    leaseTime: 24h
-  - ip: 192.168.111.9
-    macs:
-    - 24:5E:BE:5B:CD:46
-    setTags:
-    - net111
-    hostname: QSW-M2108R-2C.home.glenn4u.com
+    hostname: office-jet-8600.home.glenn4u.com
     leaseTime: 24h
   - ip: 192.168.111.21
     macs:
@@ -682,7 +934,7 @@ spec:
     leaseTime: 24h
   - ip: 192.168.111.90
     macs:
-    - e8:6a:64:f1:32:0d
+    - 3c:8c:f8:60:07:1d
     setTags:
     - net111
     hostname: GLENN-X1C6.home.glenn4u.com
@@ -717,21 +969,14 @@ spec:
     leaseTime: 24h
   - ip: 192.168.111.210
     macs:
-    - 0c:8b:fd:9b:af:aa
+    - 8c:ae:4c:f4:41:7e
     setTags:
     - net111
     hostname: nuc.home.glenn4u.com
     leaseTime: 24h
-  - ip: 192.168.111.212
-    macs:
-    - a0:ce:c8:d9:c7:4b
-    setTags:
-    - net111
-    hostname: nuc8.home.glenn4u.com
-    leaseTime: 24h
   - ip: 192.168.111.214
     macs:
-    - a0:ce:c8:da:7c:97
+    - 00:e0:4c:68:b1:7c
     setTags:
     - net111
     hostname: nuc10.home.glenn4u.com
@@ -752,7 +997,7 @@ spec:
     leaseTime: 24h
   - ip: 192.168.111.222
     macs:
-    - 00:11:32:AF:A2:33
+    - 00:11:32:af:a2:33
     setTags:
     - net111
     hostname: RamseyHillCloud.home.glenn4u.com
@@ -763,13 +1008,6 @@ spec:
     setTags:
     - net111
     hostname: netsvcs.home.glenn4u.com
-    leaseTime: 24h
-  - ip: 192.168.123.2
-    macs:
-    - 48:8f:5a:15:23:e1
-    setTags:
-    - net123
-    hostname: mikrotik.ipmi.gmarcy.com
     leaseTime: 24h
   - ip: 192.168.123.103
     macs:
@@ -862,6 +1100,13 @@ spec:
     - net123
     hostname: p360.ipmi.gmarcy.com
     leaseTime: 24h
+  - ip: 192.168.123.222
+    macs:
+    - 00:11:32:af:a2:35
+    setTags:
+    - net123
+    hostname: RamseyHillCloud.ipmi.gmarcy.com
+    leaseTime: 24h
   - ip: 192.168.123.253
     macs:
     - 34:1a:4c:03:45:25
@@ -869,12 +1114,12 @@ spec:
     - net123
     hostname: netsvcs.ipmi.gmarcy.com
     leaseTime: 24h
-  - ip: 192.168.222.2
+  - ip: 192.168.222.1
     macs:
-    - bc:cf:4f:55:e4:09
+    - 18:e8:29:4d:7a:7f
     setTags:
     - net222
-    hostname: gs1900-24.lab.gmarcy.com
+    hostname: router.lab.gmarcy.com
     leaseTime: 24h
   - ip: 192.168.222.101
     macs:
@@ -882,13 +1127,6 @@ spec:
     setTags:
     - net222
     hostname: gmarcy-mbp.lab.gmarcy.com
-    leaseTime: 24h
-  - ip: 192.168.222.103
-    macs:
-    - 3c:8c:f8:60:07:1d
-    setTags:
-    - net222
-    hostname: glenn-mbp.lab.gmarcy.com
     leaseTime: 24h
   - ip: 192.168.222.200
     macs:
@@ -948,10 +1186,10 @@ spec:
     leaseTime: 24h
   - ip: 192.168.222.210
     macs:
-    - 8c:ae:4c:f4:41:7e
+    - ec:a8:6b:fe:2f:cd
     setTags:
     - net222
-    hostname: nuc5.lab.gmarcy.com
+    hostname: nuc.lab.gmarcy.com
     leaseTime: 24h
   - ip: 192.168.222.212
     macs:
@@ -987,6 +1225,13 @@ spec:
     setTags:
     - net222
     hostname: p360.lab.gmarcy.com
+    leaseTime: 24h
+  - ip: 192.168.222.222
+    macs:
+    - 00:11:32:af:a2:34
+    setTags:
+    - net222
+    hostname: RamseyHillCloud.lab.gmarcy.com
     leaseTime: 24h
   - ip: 192.168.222.223
     macs:
@@ -1079,13 +1324,6 @@ spec:
     - net222
     hostname: netsvcs.lab.gmarcy.com
     leaseTime: 24h
-  - ip: 192.168.234.2
-    macs:
-    - 74:83:c2:fa:3c:44
-    setTags:
-    - net234
-    hostname: es-16-xg.lab10g.gmarcy.com
-    leaseTime: 24h
   - ip: 192.168.234.200
     macs:
     - 3c:ec:ef:44:c7:94
@@ -1162,6 +1400,20 @@ spec:
     setTags:
     - net234
     hostname: nuc10.lab10g.gmarcy.com
+    leaseTime: 24h
+  - ip: 192.168.234.221
+    macs:
+    - 5c:85:7e:3d:db:b8
+    setTags:
+    - net234
+    hostname: p360.lab10g.gmarcy.com
+    leaseTime: 24h
+  - ip: 192.168.234.222
+    macs:
+    - 00:11:32:af:a2:36
+    setTags:
+    - net234
+    hostname: RamseyHillCloud.lab10g.gmarcy.com
     leaseTime: 24h
   - ip: 192.168.234.253
     macs:

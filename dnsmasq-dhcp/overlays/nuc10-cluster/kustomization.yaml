@@ -67,3 +67,70 @@ patches:
       group: dnsmasq.kvaps.cf
       version: v1beta1
       kind: DhcpOptions
+  - patch: |-
+      - op: add
+        path: /spec/options/-
+        value:
+          key: dhcp-boot
+          values:
+          - tag:net222
+          - ipxe/netboot.xyz.efi
+          - nuc10
+          - 192.168.222.214
+      #- op: add
+      #  path: /spec/options/-
+      #  value:
+      #    key: dhcp-match
+      #    values:
+      #    - set:ipxe
+      #    - "175"
+      #- op: add
+      #  path: /spec/options/-
+      #  value:
+      #    key: dhcp-boot
+      #    values:
+      #    - tag:ipxe
+      #    - ipxe/netboot.xyz.kpxe
+      #- op: add
+      #  path: /spec/options/-
+      #  value:
+      #    key: dhcp-match
+      #    values:
+      #    - set:efi
+      #    - option:client-arch
+      #    - "7"
+      #- op: add
+      #  path: /spec/options/-
+      #  value:
+      #    key: dhcp-match
+      #    values:
+      #    - set:efi
+      #    - option:client-arch
+      #    - "9"
+      #- op: add
+      #  path: /spec/options/-
+      #  value:
+      #    key: dhcp-match
+      #    values:
+      #    - set:efi
+      #    - option:client-arch
+      #    - "11"
+      #- op: add
+      #  path: /spec/options/-
+      #  value:
+      #    key: dhcp-boot
+      #    values:
+      #    - tag:efi
+      #    - tag:!ipxe
+      #    - ipxe/netboot.xyz.efi
+      #- op: add
+      #  path: /spec/options/-
+      #  value:
+      #    key: dhcp-boot
+      #    values:
+      #    - tag:net222
+      #    - ipxe/netboot.xyz.kpxe
+    target:
+      group: dnsmasq.kvaps.cf
+      version: v1beta1
+      kind: DnsmasqOptions

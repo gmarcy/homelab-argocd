@@ -3,8 +3,6 @@ kind: Kustomization
 namespace: argocd
 
 resources:
-  - application-set.yaml
-  - homelab-project.yaml
   - namespace.yaml
 
 helmCharts:

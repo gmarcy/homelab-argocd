@@ -9,7 +9,7 @@ spec:
   generators:
   - git:
       files:
-      - path: '*/configurations/{{ cluster.name }}/cluster-config.yaml'
+      - path: '*/configurations/nuc10-cluster/cluster-config.yaml'
       repoURL: 'https://github.com/gmarcy/homelab-argocd.git'
       requeueAfterSeconds: 20
       revision: ""

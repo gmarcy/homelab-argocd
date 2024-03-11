@@ -65,3 +65,28 @@ spec:
     - net234
     values:
     - lab10g.gmarcy.com
+  - key: option:dns-server
+    tags:
+    - net111
+    values:
+    - 192.168.111.254
+  - key: option:dns-server
+    tags:
+    - net123
+    values:
+    - 192.168.123.254
+  - key: option:dns-server
+    tags:
+    - net222
+    values:
+    - 192.168.222.254
+  - key: option:dns-server
+    tags:
+    - net234
+    values:
+    - 192.168.234.254
+  - key: option:tftp-server
+    tags:
+    - net222
+    values:
+    - 192.168.222.254

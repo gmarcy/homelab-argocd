@@ -10,7 +10,7 @@ spec:
     dns-resolver:
       config:
         server:
-        - 192.168.222.214
+        - 192.168.222.254
         - 8.8.8.8
         search:
         - lab.gmarcy.com

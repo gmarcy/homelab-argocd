@@ -142,7 +142,7 @@ helmCharts:
             - path: /var/lib/matchbox-config
       service:
         main:
-          type: LoadBalancer
+          type: ClusterIP
           ports:
             http:
               port: 8080

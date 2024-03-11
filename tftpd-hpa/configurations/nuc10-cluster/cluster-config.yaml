@@ -1,0 +1,14 @@
+app:
+  label: tftpd-hpa
+  name: tftpd-hpa
+cluster:
+  name: nuc10-cluster
+destination:
+  namespace: tftpd-hpa
+  server: https://kubernetes.default.svc
+project:
+  name: default
+source:
+  path: tftpd-hpa/overlays/nuc10-cluster
+  repoURL: https://github.com/gmarcy/homelab-argocd.git
+  targetRevision: HEAD

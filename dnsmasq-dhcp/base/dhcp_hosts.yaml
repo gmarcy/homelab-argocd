@@ -955,7 +955,7 @@ spec:
     leaseTime: 24h
   - ip: 192.168.111.103
     macs:
-    - 3c:8c:f8:60:0a:29
+    - 50:a0:30:06:d8:ed
     setTags:
     - net111
     hostname: glenn-mbp.home.glenn4u.com
@@ -1008,13 +1008,6 @@ spec:
     setTags:
     - net111
     hostname: netsvcs.home.glenn4u.com
-    leaseTime: 24h
-  - ip: 192.168.123.103
-    macs:
-    - 50:a0:30:06:d8:ed
-    setTags:
-    - net123
-    hostname: glenn-mbp.ipmi.gmarcy.com
     leaseTime: 24h
   - ip: 192.168.123.200
     macs:

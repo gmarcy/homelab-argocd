@@ -27,6 +27,19 @@ helmCharts:
         cmp:
           create: true
           plugins:
+            helm-template-with-avp:
+              allowConcurrency: true
+              init:
+                command:
+                  - sh
+                  - -c
+                  - helm dependency update
+              generate:
+                command:
+                  - sh
+                  - -c
+                  - helm template $ARGOCD_ENV_HELM_VALUES $ARGOCD_ENV_HELM_ARGS . | argocd-vault-plugin generate -
+              lockRepo: false
             kustomize-build-with-helm-and-avp:
               allowConcurrency: true
               generate:
@@ -57,6 +70,23 @@ helmCharts:
               secretName: argocd-secret
       repoServer:
         extraContainers:
+          - name: helm-template-with-avp
+            command:
+              - "/var/run/argocd/argocd-cmp-server"
+            image: ghcr.io/gmarcy/homelab-argocd-cmp-sidecar:latest
+            securityContext:
+              runAsNonRoot: true
+              runAsUser: 999
+            volumeMounts:
+              - mountPath: /var/run/argocd
+                name: var-files
+              - mountPath: /home/argocd/cmp-server/plugins
+                name: plugins
+              - mountPath: /home/argocd/cmp-server/config/plugin.yaml
+                subPath: helm-template-with-avp.yaml
+                name: argocd-cmp-cm
+              - mountPath: /tmp
+                name: cmp-tmp
           - name: kustomize-build-with-helm-and-avp
             command:
               - "/var/run/argocd/argocd-cmp-server"

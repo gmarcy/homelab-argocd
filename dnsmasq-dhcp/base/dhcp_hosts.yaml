@@ -652,13 +652,6 @@ spec:
     - net111
     hostname: lab-pi-wifi.home.glenn4u.com
     leaseTime: 24h
-  - ip: 192.168.110.220
-    macs:
-    - 4c:44:5b:fb:0b:71
-    setTags:
-    - net111
-    hostname: p340-wifi.home.glenn4u.com
-    leaseTime: 24h
   - ip: 192.168.110.240
     macs:
     - c4:4f:33:f3:b6:76
@@ -980,13 +973,6 @@ spec:
     setTags:
     - net111
     hostname: nuc10.home.glenn4u.com
-    leaseTime: 24h
-  - ip: 192.168.111.220
-    macs:
-    - a0:ce:c8:d6:8d:4c
-    setTags:
-    - net111
-    hostname: p340.home.glenn4u.com
     leaseTime: 24h
   - ip: 192.168.111.221
     macs:
@@ -1375,7 +1361,7 @@ spec:
     leaseTime: 24h
   - ip: 192.168.234.210
     macs:
-    - a0:ce:c8:da:7b:1a
+    - 5c:85:7e:3d:db:b1
     setTags:
     - net234
     hostname: nuc.lab10g.gmarcy.com
@@ -1394,6 +1380,13 @@ spec:
     - net234
     hostname: nuc10.lab10g.gmarcy.com
     leaseTime: 24h
+  - ip: 192.168.234.220
+    macs:
+    - 5c:85:7e:3d:db:ab
+    setTags:
+    - net234
+    hostname: p340.lab10g.gmarcy.com
+    leaseTime: 24h
   - ip: 192.168.234.221
     macs:
     - 5c:85:7e:3d:db:b8
@@ -1407,6 +1400,13 @@ spec:
     setTags:
     - net234
     hostname: RamseyHillCloud.lab10g.gmarcy.com
+    leaseTime: 24h
+  - ip: 192.168.234.223
+    macs:
+    - 04:7b:cb:a8:57:b5
+    setTags:
+    - net234
+    hostname: p3.lab10g.gmarcy.com
     leaseTime: 24h
   - ip: 192.168.234.253
     macs:

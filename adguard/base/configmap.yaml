@@ -147,22 +147,6 @@ data:
       rewrites:
         - domain: registry.ipmi.gmarcy.com
           answer: 192.168.123.253
-        - domain: adguard.lab.glenn4u.com
-          answer: 192.168.222.253
-        - domain: assisted.lab.gmarcy.com
-          answer: 192.168.222.253
-        - domain: console.lab.gmarcy.com
-          answer: 192.168.222.253
-        - domain: grafana.lab.gmarcy.com
-          answer: 192.168.222.253
-        - domain: matchbox.lab.gmarcy.com
-          answer: 192.168.222.253
-        - domain: matchbox-rpc.lab.gmarcy.com
-          answer: 192.168.222.253
-        - domain: metrics.lab.gmarcy.com
-          answer: 192.168.222.253
-        - domain: registry.lab.gmarcy.com
-          answer: 192.168.222.253
         - domain: registry.lab10g.gmarcy.com
           answer: 192.168.234.253
         - domain: GS1910-24.home.glenn4u.com
@@ -349,8 +333,6 @@ data:
           answer: 192.168.110.214
         - domain: lab-pi-wifi.home.glenn4u.com
           answer: 192.168.110.216
-        - domain: p340-wifi.home.glenn4u.com
-          answer: 192.168.110.220
         - domain: may0-smart-plug.home.glenn4u.com
           answer: 192.168.110.240
         - domain: may1-smart-plug.home.glenn4u.com
@@ -443,8 +425,6 @@ data:
           answer: 192.168.111.210
         - domain: nuc10.home.glenn4u.com
           answer: 192.168.111.214
-        - domain: p340.home.glenn4u.com
-          answer: 192.168.111.220
         - domain: p360.home.glenn4u.com
           answer: 192.168.111.221
         - domain: RamseyHillCloud.home.glenn4u.com
@@ -481,66 +461,6 @@ data:
           answer: 192.168.123.222
         - domain: netsvcs.ipmi.gmarcy.com
           answer: 192.168.123.253
-        - domain: router.lab.gmarcy.com
-          answer: 192.168.222.1
-        - domain: gmarcy-mbp.lab.gmarcy.com
-          answer: 192.168.222.101
-        - domain: server0.lab.gmarcy.com
-          answer: 192.168.222.200
-        - domain: server1.lab.gmarcy.com
-          answer: 192.168.222.201
-        - domain: server2.lab.gmarcy.com
-          answer: 192.168.222.202
-        - domain: server3.lab.gmarcy.com
-          answer: 192.168.222.203
-        - domain: server4.lab.gmarcy.com
-          answer: 192.168.222.204
-        - domain: server5.lab.gmarcy.com
-          answer: 192.168.222.205
-        - domain: server6.lab.gmarcy.com
-          answer: 192.168.222.206
-        - domain: server7.lab.gmarcy.com
-          answer: 192.168.222.207
-        - domain: nuc.lab.gmarcy.com
-          answer: 192.168.222.210
-        - domain: nuc8.lab.gmarcy.com
-          answer: 192.168.222.212
-        - domain: nuc10.lab.gmarcy.com
-          answer: 192.168.222.214
-        - domain: lab-pi.lab.gmarcy.com
-          answer: 192.168.222.216
-        - domain: p340.lab.gmarcy.com
-          answer: 192.168.222.220
-        - domain: p360.lab.gmarcy.com
-          answer: 192.168.222.221
-        - domain: RamseyHillCloud.lab.gmarcy.com
-          answer: 192.168.222.222
-        - domain: p3.lab.gmarcy.com
-          answer: 192.168.222.223
-        - domain: edge2a.lab.gmarcy.com
-          answer: 192.168.222.230
-        - domain: edge2b.lab.gmarcy.com
-          answer: 192.168.222.231
-        - domain: edge2c.lab.gmarcy.com
-          answer: 192.168.222.232
-        - domain: may0.lab.gmarcy.com
-          answer: 192.168.222.240
-        - domain: may1.lab.gmarcy.com
-          answer: 192.168.222.241
-        - domain: may2.lab.gmarcy.com
-          answer: 192.168.222.242
-        - domain: may3.lab.gmarcy.com
-          answer: 192.168.222.243
-        - domain: um690.lab.gmarcy.com
-          answer: 192.168.222.245
-        - domain: th80a.lab.gmarcy.com
-          answer: 192.168.222.246
-        - domain: th80b.lab.gmarcy.com
-          answer: 192.168.222.247
-        - domain: th80c.lab.gmarcy.com
-          answer: 192.168.222.248
-        - domain: netsvcs.lab.gmarcy.com
-          answer: 192.168.222.253
         - domain: server0.lab10g.gmarcy.com
           answer: 192.168.234.200
         - domain: server1.lab10g.gmarcy.com
@@ -563,10 +483,14 @@ data:
           answer: 192.168.234.212
         - domain: nuc10.lab10g.gmarcy.com
           answer: 192.168.234.214
+        - domain: p340.lab10g.gmarcy.com
+          answer: 192.168.234.220
         - domain: p360.lab10g.gmarcy.com
           answer: 192.168.234.221
         - domain: RamseyHillCloud.lab10g.gmarcy.com
           answer: 192.168.234.222
+        - domain: p3.lab10g.gmarcy.com
+          answer: 192.168.234.223
         - domain: netsvcs.lab10g.gmarcy.com
           answer: 192.168.234.253
       safebrowsing_cache_size: 1048576

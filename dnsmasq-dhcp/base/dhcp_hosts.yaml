@@ -962,7 +962,7 @@ spec:
     leaseTime: 24h
   - ip: 192.168.111.210
     macs:
-    - 8c:ae:4c:f4:41:7e
+    - a0:ce:c8:d6:8d:4c
     setTags:
     - net111
     hostname: nuc.home.glenn4u.com

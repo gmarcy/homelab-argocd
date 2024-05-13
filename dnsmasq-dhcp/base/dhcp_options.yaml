@@ -69,22 +69,22 @@ spec:
     tags:
     - net111
     values:
-    - 192.168.111.254
+    - 8.8.8.8
   - key: option:dns-server
     tags:
     - net123
     values:
-    - 192.168.123.254
+    - 8.8.8.8
   - key: option:dns-server
     tags:
     - net222
     values:
-    - 192.168.222.254
+    - 8.8.8.8
   - key: option:dns-server
     tags:
     - net234
     values:
-    - 192.168.234.254
+    - 8.8.8.8
   - key: option:tftp-server
     tags:
     - net222

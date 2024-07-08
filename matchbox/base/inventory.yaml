@@ -158,11 +158,11 @@ all:
     p3:
       macaddr: 04-7b-cb-a8-57-b6
       bootdev: nvme0n1
-      profile: fedora-coreos
+      profile: centos-9-stream
     p340:
       macaddr: 04-7c-16-28-92-06
       bootdev: nvme0n1
-      profile: fedora-coreos
+      profile: centos-9-stream
     p360:
       macaddr: 9c-2d-cd-5b-cd-60
       bootdev: nvme0n1

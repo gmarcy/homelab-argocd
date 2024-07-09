@@ -214,4 +214,4 @@ all:
     um690:
       macaddr: 58-47-ca-70-5b-39
       bootdev: nvme0n1
-      profile: assisted
+      profile: assisted-installer

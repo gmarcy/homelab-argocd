@@ -158,7 +158,7 @@ all:
     p3:
       macaddr: 04-7b-cb-a8-57-b6
       bootdev: nvme0n1
-      profile: centos-9-stream
+      profile: debian-12
     p340:
       macaddr: 04-7c-16-28-92-06
       bootdev: nvme0n1

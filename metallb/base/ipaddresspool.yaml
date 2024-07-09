@@ -1,8 +1,0 @@
-apiVersion: metallb.io/v1beta1
-kind: IPAddressPool
-metadata:
-  name: metallb-addresspool
-  namespace: metallb-system
-spec:
-  # kustomize will add addresses
-  addresses: []

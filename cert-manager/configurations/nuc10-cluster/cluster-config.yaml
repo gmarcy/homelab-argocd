@@ -7,7 +7,7 @@ destination:
   namespace: cert-manager
   server: https://kubernetes.default.svc
 project:
-  name: default
+  name: homelab
 source:
   path: cert-manager/overlays/nuc10-cluster
   repoURL: https://github.com/gmarcy/homelab-argocd.git

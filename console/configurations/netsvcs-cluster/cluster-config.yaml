@@ -7,7 +7,7 @@ destination:
   namespace: openshift-console
   server: https://kubernetes.default.svc
 project:
-  name: default
+  name: homelab
 source:
   path: console/overlays/netsvcs-cluster
   repoURL: https://github.com/gmarcy/homelab-argocd.git

@@ -7,7 +7,7 @@ destination:
   namespace: tftpd-hpa
   server: https://kubernetes.default.svc
 project:
-  name: default
+  name: homelab
 source:
   path: tftpd-hpa/overlays/nuc10-cluster
   repoURL: https://github.com/gmarcy/homelab-argocd.git

@@ -84,7 +84,7 @@ all:
               - auto=true
               - priority=critical
               - url=http://matchbox.192.168.222.254.nip.io/generic?uuid=${uuid}&mac=${mac:hexhyp}
-              - interface=eno1
+              - interface={{ netdev }}
               - initrd=initrd.magic
         fedora-coreos:
           id: fedora-coreos-install
@@ -120,6 +120,7 @@ all:
         server_name: '{{ inventory_hostname }}'
         domain_name: '{{ inventory_hostname }}.lab.gmarcy.com'
         boot_drive: '{{ bootdev }}'
+        net_device: '{{ netdev }}'
         ssh_authorized_keys: "{{ ssh_authorized_keys }}"
     profiles_template:
       id: "{{ hostvars[profile].id }}"
@@ -130,88 +131,110 @@ all:
     may0:
       macaddr: 00-e0-4c-0d-e8-3d
       bootdev: sda
+      netdev: eno1
       profile: fedora-coreos
     may1:
       macaddr: 00-e0-4c-0d-ed-31
       bootdev: sda
+      netdev: eno1
       profile: fedora-coreos
     may2:
       macaddr: 00-e0-4c-0d-ed-17
       bootdev: sda
+      netdev: eno1
       profile: fedora-coreos
     may3:
       macaddr: 00-e0-4c-0d-dd-1e
       bootdev: sda
+      netdev: eno1
       profile: fedora-coreos
     netsvcs:
       macaddr: 34-1a-4c-03-45-23
       bootdev: nvme0n1
+      netdev: eno1
       profile: fedora-coreos
     nuc10:
       macaddr: 1c-69-7a-6d-29-43
       bootdev: nvme0n1
+      netdev: eno1
       profile: fedora-coreos
     nuc8:
       macaddr: 1c-69-7a-6b-18-d3
       bootdev: nvme0n1
+      netdev: eno1
       profile: fedora-coreos
     p3:
       macaddr: 04-7b-cb-a8-57-b6
       bootdev: nvme0n1
+      netdev: enp5s0
       profile: debian-12
     p340:
       macaddr: 04-7c-16-28-92-06
       bootdev: nvme0n1
+      netdev: eno1
       profile: centos-9-stream
     p360:
       macaddr: 9c-2d-cd-5b-cd-60
       bootdev: nvme0n1
+      netdev: eno1
       profile: centos-9-stream
     server0:
       macaddr: 3c-ec-ef-44-bf-f0
       bootdev: nvme0n1
+      netdev: eno1
       profile: fedora-coreos
     server1:
       macaddr: 3c-ec-ef-44-ec-6a
       bootdev: nvme0n1
+      netdev: eno1
       profile: fedora-coreos
     server2:
       macaddr: 3c-ec-ef-44-ed-90
       bootdev: nvme0n1
+      netdev: eno1
       profile: fedora-coreos
     server3:
       macaddr: 3c-ec-ef-44-ec-f2
       bootdev: nvme0n1
+      netdev: eno1
       profile: fedora-coreos
     server4:
       macaddr: 3c-ec-ef-44-ec-38
       bootdev: nvme0n1
+      netdev: eno1
       profile: fedora-coreos
     server5:
       macaddr: 3c-ec-ef-6b-c6-72
       bootdev: nvme0n1
+      netdev: eno1
       profile: fedora-coreos
     server6:
       macaddr: 3c-ec-ef-6b-c7-56
       bootdev: nvme0n1
+      netdev: eno1
       profile: fedora-coreos
     server7:
       macaddr: 3c-ec-ef-6b-c6-86
       bootdev: nvme0n1
+      netdev: eno1
       profile: fedora-coreos
     th80a:
       macaddr: 58-47-ca-70-18-13
       bootdev: disk/by-path/pci-0000:01:00.0-nvme-1
+      netdev: eno1
       profile: fedora-coreos
     th80b:
       macaddr: 58-47-ca-70-15-b8
       bootdev: disk/by-path/pci-0000:01:00.0-nvme-1
+      netdev: eno1
       profile: fedora-coreos
     th80c:
       macaddr: 58-47-ca-70-15-c3
       bootdev: disk/by-path/pci-0000:01:00.0-nvme-1
+      netdev: eno1
       profile: fedora-coreos
     um690:
       macaddr: 58-47-ca-70-5b-39
       bootdev: nvme0n1
+      netdev: eno1
       profile: assisted-installer

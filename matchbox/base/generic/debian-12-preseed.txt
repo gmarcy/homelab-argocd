@@ -26,7 +26,7 @@ d-i keyboard-configuration/xkb-keymap select us
 #d-i netcfg/choose_interface select auto
 
 # To pick a particular interface instead:
-d-i netcfg/choose_interface select eno1
+d-i netcfg/choose_interface select {{.net_device}}
 
 # To set a different link detection timeout (default is 3 seconds).
 # Values are interpreted as seconds.

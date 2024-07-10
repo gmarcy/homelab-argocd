@@ -46,8 +46,10 @@ all:
             #  dest: '/debian-12/debian-testing-amd64-netinst.iso'
             #  mode: '0644'
           unarchive_list:
-            - src: 'https://d-i.debian.org/daily-images/amd64/daily/netboot/netboot.tar.gz'
+            - src: 'https://deb.debian.org/debian/dists/bookworm/main/installer-amd64/current/images/netboot/netboot.tar.gz'
               dest: '/debian-12/'
+            #- src: 'https://d-i.debian.org/daily-images/amd64/daily/netboot/netboot.tar.gz'
+            #  dest: '/debian-12/'
     profiles:
       hosts:
         assisted-installer:

@@ -162,7 +162,7 @@ d-i clock-setup/ntp boolean true
 # name must be given in traditional, non-devfs format (so e.g. /dev/sda
 # and not e.g. /dev/discs/disc0/disc).
 # For example, to use the first SCSI/SATA hard disk:
-d-i partman-auto/disk string /dev/nvme0n1
+d-i partman-auto/disk string /dev/{{.boot_drive}}
 # In addition, you'll need to specify the method to use.
 # The presently available methods are:
 # - regular: use the usual partition types for your architecture
@@ -473,6 +473,8 @@ d-i preseed/late_command string \
   in-target update-alternatives --set editor /usr/bin/vim.tiny; \
   in-target mkdir -p /home/libvirt/lib; \
   in-target ln -s /home/libvirt/lib /var/lib/libvirt; \
+  in-target mkdir -p /home/containers/lib; \
+  in-target ln -s /home/containers/lib /var/lib/containers; \
   in-target sed -i 's/    HashKnownHosts yes/#   HashKnownHosts yes/' /etc/ssh/ssh_config; \
   in-target sed -i 's/    GSSAPIAuthentication yes/#   GSSAPIAuthentication yes/' /etc/ssh/ssh_config; \
   in-target chmod u+w /etc/sudoers; \

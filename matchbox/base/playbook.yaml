@@ -52,6 +52,21 @@
         src: "{{ data_path + '/assets/nbxyz/' + hostvars[profile].ipxe_template }}"
         path: "{{ data_path + '/assets/nbxyz/pxelinux.cfg/' + macaddr }}"
         state: hard
+    - when: profile == 'ubuntu-noble'
+      block:
+        - file:
+            path: "{{ data_path + '/assets/ubuntu-noble/cloud-init/' + macaddr }}"
+            state: directory
+            mode: '0755'
+        - template:
+            src: "{{ data_path + '/assets/ubuntu-noble/cloud-init/user-data.j2' }}"
+            dest: "{{ data_path + '/assets/ubuntu-noble/cloud-init/' + macaddr + '/user-data' }}"
+            mode: '0644'
+        - file:
+            path: "{{ data_path + '/assets/ubuntu-noble/cloud-init/' + macaddr + '/' + item }}"
+            state: touch
+            mode: '0644'
+          loop: ['meta-data','vendor-data','network-config']
 
 - name: Download hosted assets
   hosts: assets

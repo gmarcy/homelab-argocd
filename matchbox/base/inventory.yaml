@@ -12,6 +12,8 @@ all:
           - assets/fedora-coreos
           - assets/nbxyz
           - assets/nbxyz/pxelinux.cfg
+          - assets/ubuntu-noble/ubuntu-installer
+          - assets/ubuntu-noble/cloud-init
           - generic
           - groups
           - profiles
@@ -26,6 +28,8 @@ all:
             dest: assets/nbxyz/menu.ipxe
           - src: nbxyzmenu.ipxe
             dest: assets/nbxyz/nbxyzmenu.ipxe
+          - src: user-data.j2
+            dest: assets/ubuntu-noble/cloud-init/user-data.j2
           - src: centos-9-stream-kickstart.conf
             dest: generic/centos-9-stream-kickstart.conf
           - src: debian-12-preseed.txt
@@ -52,9 +56,14 @@ all:
             - url: 'https://download.fedoraproject.org/pub/fedora/linux/releases/40/Server/x86_64/os/images/pxeboot/initrd.img'
               dest: '/fedora-40/images/pxeboot/initrd.img'
               mode: '0644'
+            - url: 'https://cdimage.ubuntu.com/ubuntu-server/noble/daily-live/current/noble-live-server-amd64.iso'
+              dest: '/ubuntu-noble/noble-live-server-amd64.iso'
+              mode: '0644'
           unarchive_list:
             - src: 'https://deb.debian.org/debian/dists/bookworm/main/installer-amd64/current/images/netboot/netboot.tar.gz'
               dest: '/debian-12/'
+            - src: 'https://cdimage.ubuntu.com/ubuntu-server/noble/daily-live/current/noble-netboot-amd64.tar.gz'
+              dest: '/ubuntu-noble/ubuntu-installer'
     profiles:
       hosts:
         assisted-installer:
@@ -123,6 +132,24 @@ all:
               - coreos.live.rootfs_url=http://matchbox.192.168.222.254.nip.io/assets/fedora-coreos/fedora-coreos-live-rootfs.x86_64.img
               - coreos.inst.install_dev=/dev/{{ bootdev }}
               - coreos.inst.ignition_url=http://matchbox.192.168.222.254.nip.io/generic?uuid=${uuid}&mac=${mac:hexhyp}
+        ubuntu-noble:
+          id: ubuntu-noble-install
+          name: ubuntu-noble-install
+          ipxe_template: matchbox.ipxe
+          boot:
+            kernel: /assets/ubuntu-noble/ubuntu-installer/amd64/linux
+            initrd:
+              - /assets/ubuntu-noble/ubuntu-installer/amd64/initrd
+            args:
+              - initrd=initrd
+              - inst.sshd=1
+              - interface={{ netdev }}
+              - root=/dev/ram0
+              - ramdisk_size=1500000
+              - ip=dhcp
+              - iso-url=http://matchbox.192.168.222.254.nip.io/assets/ubuntu-noble/noble-live-server-amd64.iso
+              - autoinstall
+              - ds=nocloud-net;s=http://matchbox.192.168.222.254.nip.io/assets/ubuntu-noble/cloud-init/${mac:hexhyp}
   vars:
     ansible_python_interpreter: /usr/bin/python3
     ansible_host: localhost
@@ -188,12 +215,12 @@ all:
       macaddr: 04-7b-cb-a8-57-b6
       bootdev: nvme0n1
       netdev: enp5s0
-      profile: debian-12
+      profile: ubuntu-noble
     p340:
       macaddr: 04-7c-16-28-92-06
       bootdev: nvme0n1
       netdev: eno1
-      profile: centos-9-stream
+      profile: debian-12
     p360:
       macaddr: 9c-2d-cd-5b-cd-60
       bootdev: nvme0n1

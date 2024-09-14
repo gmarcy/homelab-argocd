@@ -141,15 +141,18 @@ all:
             initrd:
               - /assets/ubuntu-noble/ubuntu-installer/amd64/initrd
             args:
-              - initrd=initrd
-              - inst.sshd=1
-              - interface={{ netdev }}
+              #- initrd=initrd
+              #- inst.sshd=1
+              #- interface={{ netdev }}
               - root=/dev/ram0
               - ramdisk_size=1500000
-              - ip=dhcp
-              - iso-url=http://matchbox.192.168.222.254.nip.io/assets/ubuntu-noble/noble-live-server-amd64.iso
-              - autoinstall
-              - ds=nocloud-net;s=http://matchbox.192.168.222.254.nip.io/assets/ubuntu-noble/cloud-init/${mac:hexhyp}
+              - ip={{ netdev }}
+              - iso-url=https://cdimage.ubuntu.com/ubuntu-server/noble/daily-live/current/noble-live-server-amd64.iso
+              - ---
+              #- ip={{ netdev }}
+              #- iso-url=http://matchbox.192.168.222.254.nip.io/assets/ubuntu-noble/noble-live-server-amd64.iso
+              #- autoinstall
+              #- ds=nocloud-net;s=http://matchbox.192.168.222.254.nip.io/assets/ubuntu-noble/cloud-init/${mac:hexhyp}
   vars:
     ansible_python_interpreter: /usr/bin/python3
     ansible_host: localhost

@@ -54,14 +54,18 @@ autoinstall:
   network:
     ethernets:
       {{ netdev }}:
-        critical: true
-        dhcp-identifier: mac
         dhcp4: true
+        dhcp4-overrides:
+          route-metric: 100
         nameservers:
           addresses:
           - 8.8.8.8
           search:
           - lab.gmarcy.com.
+      enp4s0:
+        dhcp4: true
+        dhcp4-overrides:
+          route-metric: 200
     version: 2
     wifis: {}
   oem:
